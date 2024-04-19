@@ -1,7 +1,7 @@
 {
-  "name": "ejercicios-js",
+  "name": "ejerciciosjs-1",
   "version": "1.0.0",
-  "description": "Algoritmos basicos js",
+  "description": "",
   "main": "js/main.js",
   "type": "module",
   "scripts": {
