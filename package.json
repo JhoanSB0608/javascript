@@ -5,7 +5,8 @@
   "main": "js/main.js",
   "type": "module",
   "scripts": {
-    "dev": "node js/main.js"
+    "dev": "node js/main.js",
+    "server": "json-server js/db/db.json"
   },
   "keywords": [],
   "author": "",
