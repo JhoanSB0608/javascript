@@ -1,7 +1,4 @@
 import prompt from 'async-prompt';
-import {sumarRango} from "./module/sumarRangoDeNumeros.js"
+import {sumarArreglo} from "./module/sumarArregloEntreElRango.js"
 
-let num1 = Number(await prompt ("Ingrese el numero 1: "))
-let num2 = Number(await prompt ("Ingrese el numero 2: "))
-
-console.log(sumarRango(num1, num2));
+console.log(sumarArreglo([1,2,3,4,5,6,7,8,9,10], 3, 6))
