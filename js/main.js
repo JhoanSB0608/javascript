@@ -1,7 +1,6 @@
 import prompt from 'async-prompt';
-import {sumarRango} from "./module/sumarRangoDeNumeros.js"
+import {contrasenaValida} from "./module/contrasenaValida.js"
 
-let num1 = Number(await prompt ("Ingrese el numero 1: "))
-let num2 = Number(await prompt ("Ingrese el numero 2: "))
+let contrasena = await prompt ("Ingrese su contraseña: ")
 
-console.log(sumarRango(num1, num2));
+console.log(contrasenaValida(contrasena))
