@@ -1,6 +1,16 @@
 import prompt from 'async-prompt'
-import { getAllProfile, postProfile } from './module/camper.js';
 
-let name = await prompt("Ingrese el name: ")
-console.log(await postProfile(name));
-console.log(await getAllProfile(name));
+import { 
+    getAllFullNameAndEmailsAndBoss,
+    getBossFullNameAndEmail, getAllFullNamePositionDiferentSalesRepresentative
+} from "./module/employees.js";
+
+// console.log(await getAllFullNameAndEmailsAndBoss())
+// console.log(await getBossFullNameAndEmail());
+console.log(await getAllFullNamePositionDiferentSalesRepresentative())
+
+// import { 
+//     getAllFullNameSpanishClients
+// } from "./module/clients.js";
+
+// console.log(await getAllFullNameSpanishClients())
