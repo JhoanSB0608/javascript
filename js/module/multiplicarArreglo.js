@@ -1,0 +1,1 @@
+export const multiplicarArreglo = arreglo => arreglo.reduce((acumulador, elemento) => acumulador * elemento, 1);
