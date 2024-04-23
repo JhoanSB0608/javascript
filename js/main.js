@@ -1,7 +1,6 @@
 import prompt from 'async-prompt';
-import {sumarRango} from "./module/sumarRangoDeNumeros.js"
+import {capitalizar} from "./module/capitalizarPalabra.js"
 
-let num1 = Number(await prompt ("Ingrese el numero 1: "))
-let num2 = Number(await prompt ("Ingrese el numero 2: "))
-
-console.log(sumarRango(num1, num2));
+const entrada = await prompt("Ingrese palabras separadas por espacios: ");
+    const palabras = entrada.split(" ").map(palabra => capitalizar(palabra));
+    console.log("Palabras capitalizadas:", palabras.join(" "));
