@@ -1,7 +1,6 @@
 import prompt from 'async-prompt';
-import {sumarRango} from "./module/sumarRangoDeNumeros.js"
+import {posiciones} from "./module/encontrarPosicionesNumerosPares.js"
 
-let num1 = Number(await prompt ("Ingrese el numero 1: "))
-let num2 = Number(await prompt ("Ingrese el numero 2: "))
-
-console.log(sumarRango(num1, num2));
+const input = await prompt("Ingrese los números separados por espacios: ");
+const numbers = input.split(" ").map(Number);
+console.log(posiciones(numbers)); 
