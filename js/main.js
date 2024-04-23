@@ -1,7 +1,15 @@
 import prompt from 'async-prompt';
-import {sumarRango} from "./module/sumarRangoDeNumeros.js"
+import {imprimirMatriz } from "./module/imprimirMatriz.js"
 
-let num1 = Number(await prompt ("Ingrese el numero 1: "))
-let num2 = Number(await prompt ("Ingrese el numero 2: "))
-
-console.log(sumarRango(num1, num2));
+let entrada = '';
+let matriz = [];
+while (true) {
+  const fila = await prompt("Ingrese una fila de la matriz (ingrese 'fin' para terminar): ");
+  if (fila.toLowerCase() === 'fin') {
+    break;
+  }
+  entrada += fila + ';';
+}
+const filas = entrada.split(";").filter(Boolean); 
+matriz = filas.map(fila => fila.split(" ").map(Number));
+imprimirMatriz(matriz)
