@@ -1,0 +1,1 @@
+export const pares = arr => arr.filter(num => num % 2 === 0);
