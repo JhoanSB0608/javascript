@@ -1,0 +1,1 @@
+export const empiezanConA = arr => arr.filter(word => word.toLowerCase().startsWith('a'));
