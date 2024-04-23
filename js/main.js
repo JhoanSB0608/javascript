@@ -1,7 +1,5 @@
 import prompt from 'async-prompt';
-import {sumarRango} from "./module/sumarRangoDeNumeros.js"
+import {likes} from "./module/numeroDeLikes.js"
 
-let num1 = Number(await prompt ("Ingrese el numero 1: "))
-let num2 = Number(await prompt ("Ingrese el numero 2: "))
-
-console.log(sumarRango(num1, num2));
+const seguidores = parseInt(await prompt("Ingrese el número de seguidores: "));
+    console.log("Likes:", likes(seguidores));
