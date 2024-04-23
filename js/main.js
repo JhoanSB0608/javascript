@@ -1,7 +1,7 @@
 import prompt from 'async-prompt';
-import {sumarRango} from "./module/sumarRangoDeNumeros.js"
+import {IMC} from "./modulo/IMC.js";
 
-let num1 = Number(await prompt ("Ingrese el numero 1: "))
-let num2 = Number(await prompt ("Ingrese el numero 2: "))
+let peso = await prompt ("Ingrese su peso: ");
+let altura = await prompt ("Ingrese su altura: ");
 
-console.log(sumarRango(num1, num2));
+console.log(IMC(peso, altura));
