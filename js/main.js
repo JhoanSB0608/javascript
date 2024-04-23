@@ -1,6 +1,7 @@
 import prompt from 'async-prompt';
-import { calcularImpuestos } from "./module/calcularImpuestos.js"
+import { calcularImpuestos } from "./module/calcularImpuestos.js";
 
-let ingresos = await prompt("Ingrese sus ingresos: ")
+let edad = await prompt ("Ingrese su edad: ");
+let ingreso = await prompt ("Ingrese su ingreso: ");
 
-console.log(calcularImpuestos(ingresos))
+console.log(calcularImpuestos(edad, ingreso))
