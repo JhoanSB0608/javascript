@@ -1,7 +1,5 @@
 import prompt from 'async-prompt';
-import {sumarRango} from "./module/sumarRangoDeNumeros.js"
+import {fizzBuzz} from "./module/fizzBuzz.js"
 
-let num1 = Number(await prompt ("Ingrese el numero 1: "))
-let num2 = Number(await prompt ("Ingrese el numero 2: "))
-
-console.log(sumarRango(num1, num2));
+const numero = parseInt(await prompt("Por favor, ingrese un número: "));
+console.log("Resultado:", fizzBuzz(numero));
