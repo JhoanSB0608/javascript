@@ -1,7 +1,7 @@
 import prompt from 'async-prompt';
-import {sumarRango} from "./module/sumarRangoDeNumeros.js"
+import {palabrasANumeros} from "./module/palabrasANumeros.js"
 
-let num1 = Number(await prompt ("Ingrese el numero 1: "))
-let num2 = Number(await prompt ("Ingrese el numero 2: "))
+const input = await prompt("Ingrese las palabras en minuscula y separadas por espacios: ");
+const palabrasIngresadas = input.trim().split(" ");
 
-console.log(sumarRango(num1, num2));
+console.log(palabrasANumeros(palabrasIngresadas));
