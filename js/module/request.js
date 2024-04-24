@@ -44,3 +44,26 @@ export const getAllOrderCodeClientCodeAndOrdersThatHaveNotBeenDeliveredOnTime = 
     });
     return overdueOrders;
 };
+
+// 10. Devuelve un listado con el código de pedido, código de cliente, fecha esperada y fecha de entrega de los pedidos 
+// cuya fecha de entrega ha sido al menos dos días antes de la fecha esperada.
+
+export const getAllOrderCodeClientCodeAndDeliveryDateLeastTwoDaysBefore = async () => {
+    let res = await fetch("http://localhost:5508/requests");
+    let data = await res.json();
+    let overdueOrders = [];
+    data.forEach(order => {
+        let deliveryDate = new Date(order.date_delivery);
+        let waitDate = new Date(order.date_wait);
+        let differenceInDays = (deliveryDate - waitDate);
+        if (differenceInDays >= 2) {
+            overdueOrders.push({
+                code_request: order.code_request,
+                code_client: order.code_client,
+                date_wait: order.date_wait,
+                date_delivery: order.date_delivery
+            });
+        }
+    });
+    return overdueOrders;
+};

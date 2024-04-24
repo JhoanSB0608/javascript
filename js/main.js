@@ -20,6 +20,7 @@
 
 import { 
     getListStatusRequests, getAllClientCodeOrderedBefore,
-    getAllOrderCodeClientCodeAndOrdersThatHaveNotBeenDeliveredOnTime
+    getAllOrderCodeClientCodeAndOrdersThatHaveNotBeenDeliveredOnTime,
+    getAllOrderCodeClientCodeAndDeliveryDateLeastTwoDaysBefore
 } from "./module/request.js";
-console.log(await getAllOrderCodeClientCodeAndOrdersThatHaveNotBeenDeliveredOnTime());
+console.log(await getAllOrderCodeClientCodeAndDeliveryDateLeastTwoDaysBefore());
