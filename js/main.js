@@ -1,7 +1,8 @@
 import prompt from 'async-prompt';
-import {sumarRango} from "./module/sumarRangoDeNumeros.js"
+import { numAsteriscos } from "./module/numeroDeAsteriscosEnMatriz.js"
 
-let num1 = Number(await prompt ("Ingrese el numero 1: "))
-let num2 = Number(await prompt ("Ingrese el numero 2: "))
+const matrizStr = await prompt("Ingrese la matriz de asteriscos (cada fila separada por ', ' y cada elemento de la fila separado por espacio): ");
+const matriz = matrizStr.split(', ').map(fila => fila.split(' '));
+const cantidadAsteriscos = numAsteriscos(matriz);
 
-console.log(sumarRango(num1, num2));
+console.log("Número de asteriscos:", cantidadAsteriscos);
