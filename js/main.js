@@ -21,6 +21,6 @@
 import { 
     getListStatusRequests, getAllClientCodeOrderedBefore,
     getAllOrderCodeClientCodeAndOrdersThatHaveNotBeenDeliveredOnTime,
-    getAllOrderCodeClientCodeAndDeliveryDateLeastTwoDaysBefore
+    getAllOrderCodeClientCodeAndDeliveryDateLeastTwoDaysBefore, getAllOrdersThatWereRejectedIn2009
 } from "./module/request.js";
-console.log(await getAllOrderCodeClientCodeAndDeliveryDateLeastTwoDaysBefore());
+console.log(await getAllOrdersThatWereRejectedIn2009());

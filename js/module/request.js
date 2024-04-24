@@ -66,4 +66,16 @@ export const getAllOrderCodeClientCodeAndDeliveryDateLeastTwoDaysBefore = async 
         }
     });
     return overdueOrders;
-};
+}
+
+// 11. Devuelve un listado de todos los pedidos que fueron rechazados en 2009
+
+export const getAllOrdersThatWereRejectedIn2009 = async () => {
+    let res = await fetch("http://localhost:5508/requests?status=Rechazado");
+    let data = await res.json();
+    let rejectedOrdersIn2009 = data.filter(order => {
+        let year = new Date(order.date_request).getFullYear();
+        return year === 2009;
+    });
+    return rejectedOrdersIn2009;
+}
