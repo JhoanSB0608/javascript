@@ -1,20 +1,19 @@
-import { 
-    getAllOficceAndCodeCity, 
-    getAllOficceCityAndMovil 
-} from "./module/offices.js";
-import { 
-    getAllFullNameAndEmailsAndBoss,
-    getBossFullNameAndEmail,
-    getAllFullnamePositionDiferentSalesRepresentative
-} from "./module/employees.js";
+// import { 
+//     getAllOficceAndCodeCity, 
+//     getAllOficceCityAndMovil 
+// } from "./module/offices.js";
+// import { 
+//     getAllFullNameAndEmailsAndBoss,
+//     getBossFullNameAndEmail,
+//     getAllFullnamePositionDiferentSalesRepresentative
+// } from "./module/employees.js";
 
 import { 
     getAllClientsFromCityAndCode,
-    getAll
+    getAll, getAllClientsFromSpain
 } from "./module/clients.js";
+console.log(await getAllClientsFromSpain());
 
-import { 
-    getAllPaymentsFromPayPalEachYear 
-} from "./module/payments.js";
-
-console.log(await getAll());
+// import { 
+//     getAllPaymentsFromPayPalEachYear 
+// } from "./module/payments.js";
