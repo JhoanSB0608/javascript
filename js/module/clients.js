@@ -8,3 +8,73 @@ export const getAllClientsFromCityAndCode = async()=>{
     clientUpdate = data.filter(val => val.code_employee_sales_manager == 11 || val.code_employee_sales_manager == 30);
     return clientUpdate
 }
+
+// Consultas multitabla
+// 7. Devuelve el nombre de los clientes y el nombre de sus representantes
+// junto con la ciudad de la oficina a la que pertenece el representante.
+export const getAll = async()=>{
+    let res = await fetch("http://localhost:5501/clients")
+    let client = await res.json();
+    for (let i = 0; i < client.length; i++) {
+        // Actualiza la data clientes eliminando identificadores que no queremos
+        let { 
+            id:id_client,
+            limit_credit,
+            postal_code:postal_code_client,
+            country:country_client,
+            region:region_client,
+            city,
+            address2:address2_client,
+            address1:address1_client,
+            fax,
+            phone,
+            ...clientUpdate} = client[i]
+            client[i] = clientUpdate
+        // Realizamos la consulta al fucion modular de los empleados para buscar
+        // la informacion del empleado segun su id de la data cliente anterior
+        // buscada
+        let [employee] = await getEmployeesByCode(clientUpdate.code_employee_sales_manager)
+        
+        let {
+            id:id_employee,
+            extension,
+            email,
+            code_boss,
+            position,
+            ...employeeUpdate
+        } = employee
+        let [office] = await getOfficesByCode(employeeUpdate.code_office)
+        let {
+            id:id_office,
+            country,
+            region,
+            postal_code,
+            movil,
+            address1,
+            address2,
+            ...officeUpdate
+        } = office
+        let data = {...clientUpdate, ...employeeUpdate, ...officeUpdate}
+        // {  
+        //     client_code: 38,
+        //     client_name: 'El Jardin Viviente S.L',
+        //     contact_name: 'Justin',
+        //     contact_lastname: 'Smith',
+        //     code_employee_sales_manager: 31,
+        //     employee_code: 31,
+        //     name: 'Mariko',
+        //     lastname1: 'Kishi',
+        //     lastname2: '',
+        //     code_office: 'SYD-AU',
+        //     city: 'Sydney'
+        //   }
+        client[i] = {
+            client_name: `${data.client_name}`,
+            employees_full_name: `${data.name} ${data.lastname1} ${data.lastname2}`,
+            employees_office_code: data.code_office,
+            city_employees: data.city
+        }
+        
+    }
+    return client;
+}
