@@ -1,16 +1,20 @@
-import prompt from 'async-prompt'
-
+import { 
+    getAllOficceAndCodeCity, 
+    getAllOficceCityAndMovil 
+} from "./module/offices.js";
 import { 
     getAllFullNameAndEmailsAndBoss,
-    getBossFullNameAndEmail, getAllFullNamePositionDiferentSalesRepresentative
+    getBossFullNameAndEmail,
+    getAllFullnamePositionDiferentSalesRepresentative
 } from "./module/employees.js";
 
-// console.log(await getAllFullNameAndEmailsAndBoss())
-// console.log(await getBossFullNameAndEmail());
-console.log(await getAllFullNamePositionDiferentSalesRepresentative())
+import { 
+    getAllClientsFromCityAndCode,
+    getAll
+} from "./module/clients.js";
 
-// import { 
-//     getAllFullNameSpanishClients
-// } from "./module/clients.js";
+import { 
+    getAllPaymentsFromPayPalEachYear 
+} from "./module/payments.js";
 
-// console.log(await getAllFullNameSpanishClients())
+console.log(await getAll());
