@@ -19,6 +19,6 @@
 // } from "./module/payments.js";
 
 import { 
-    getListStatusRequests
+    getListStatusRequests, getAllClientCodeOrderedBefore
 } from "./module/request.js";
-console.log(await getListStatusRequests());
+console.log(await getAllClientCodeOrderedBefore());
