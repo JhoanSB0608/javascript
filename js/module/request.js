@@ -1,9 +1,9 @@
 // 7. Devuelve un listado con los distintos estados por los que puede pasar un pedido.
-export const getListStatusRequests=async()=>{
+export const getListStatusRequests = async () => {
     let res = await fetch("http://localhost:5508/requests")
     let data = await res.json();
-    let dataupdateset= new Set(data.map(dev=>dev.status))
-    let dataUpdate=[...dataupdateset]
+    let dataupdateset = new Set(data.map(dev => dev.status))
+    let dataUpdate = [...dataupdateset]
     return dataUpdate
 }
 
@@ -19,7 +19,7 @@ export const getAllClientCodeOrderedBefore = async () => {
         let [year] = val.date_request.split("-");
         if (year == 2008 && !clientCodesSet.has(val.code_client)) {
             dataUpdate.push({ ClientCode: val.code_client, fecha: val.date_request });
-            clientCodesSet.add(val.code_client); 
+            clientCodesSet.add(val.code_client);
         }
     });
     return dataUpdate;
@@ -48,24 +48,27 @@ export const getAllOrderCodeClientCodeAndOrdersThatHaveNotBeenDeliveredOnTime = 
 // 10. Devuelve un listado con el código de pedido, código de cliente, fecha esperada y fecha de entrega de los pedidos 
 // cuya fecha de entrega ha sido al menos dos días antes de la fecha esperada.
 
-export const getAllOrderCodeClientCodeAndDeliveryDateLeastTwoDaysBefore = async () => {
-    let res = await fetch("http://localhost:5508/requests");
-    let data = await res.json();
-    let overdueOrders = [];
-    data.forEach(order => {
-        let deliveryDate = new Date(order.date_delivery);
-        let waitDate = new Date(order.date_wait);
-        let differenceInDays = (deliveryDate - waitDate);
-        if (differenceInDays >= 2) {
-            overdueOrders.push({
-                code_request: order.code_request,
-                code_client: order.code_client,
-                date_wait: order.date_wait,
-                date_delivery: order.date_delivery
-            });
+export const getAllOrderCodeClientCodeAndDeliveryDateLeastTwoDaysBefore = async()=>{
+    let res=await fetch("http://localhost:5508/requests")
+    let data =await res.json();
+    let dataUpdate = [];
+    data.forEach(val=>{
+        let date_wait = new Date(val.date_wait);
+        let date_delivery = new Date(val.date_delivery);
+        if(date_delivery < date_wait){
+            let diferenciaM = date_wait.getTime()-date_delivery.getTime();
+            let diferenciaD = diferenciaM / (1000*3600*24)
+            if(diferenciaD>=2 && val.date_delivery != null){
+                dataUpdate.push({
+                    code_request: val.code_request,
+                    code_client: val.code_client,
+                    date_wait: val.date_wait,
+                    date_delivery: val.date_delivery,
+                })
+            }
         }
-    });
-    return overdueOrders;
+    })
+    return dataUpdate;
 }
 
 // 11. Devuelve un listado de todos los pedidos que fueron rechazados en 2009
@@ -78,4 +81,16 @@ export const getAllOrdersThatWereRejectedIn2009 = async () => {
         return year === 2009;
     });
     return rejectedOrdersIn2009;
+}
+
+// 12. Devuelve un listado de todos los pedidos que han sido entregados en el mes de enero de cualquier año.
+
+export const getAllOrdersDeliveredInTheMonthOfJanuaryOfAnyYear = async () => {
+    let res = await fetch("http://localhost:5508/requests?status=Entregado");
+    let data = await res.json();
+    let ordersDeliveredInJanuary = data.filter(order => {
+        let month = new Date(order.date_delivery).getMonth();
+        return month === 0; // 0 representa enero
+    });
+    return ordersDeliveredInJanuary;
 }
