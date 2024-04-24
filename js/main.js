@@ -1,7 +1,8 @@
 import prompt from 'async-prompt';
-import {sumarRango} from "./module/sumarRangoDeNumeros.js"
+import { distancia } from "./module/distanciaEntreDosStrings.js"
 
-let num1 = Number(await prompt ("Ingrese el numero 1: "))
-let num2 = Number(await prompt ("Ingrese el numero 2: "))
+const str1 = await prompt("Ingrese el primer string: ");
+const str2 = await prompt("Ingrese el segundo string: ");
+const resultado = distancia(str1, str2);
 
-console.log(sumarRango(num1, num2));
+console.log("Distancia entre los strings:", resultado);
