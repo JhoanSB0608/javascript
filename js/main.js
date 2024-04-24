@@ -19,6 +19,7 @@
 // } from "./module/payments.js";
 
 import { 
-    getListStatusRequests, getAllClientCodeOrderedBefore
+    getListStatusRequests, getAllClientCodeOrderedBefore,
+    getAllOrderCodeClientCodeAndOrdersThatHaveNotBeenDeliveredOnTime
 } from "./module/request.js";
-console.log(await getAllClientCodeOrderedBefore());
+console.log(await getAllOrderCodeClientCodeAndOrdersThatHaveNotBeenDeliveredOnTime());
