@@ -3,36 +3,35 @@
 //     getAllOficceCityAndMovil 
 // } from "./module/offices.js";
 // import { 
-//     getAllFullNameAndEmailsAndBoss,
-//     getBossFullNameAndEmail,
-//     getAllFullnamePositionDiferentSalesRepresentative
+//     getEmployeesByCode
 // } from "./module/employees.js";
+// console.log(await getEmployeesByCode());
 
 // import { 
-//     getAllClientsFromCityAndCode,
-//     getAll, getAllClientsFromSpain, getListClientsPayIn2008
+//     getAllClientNameAndSalesManager
 // } from "./module/clients.js";
-// console.log(await getListClientsPayIn2008());
+
+// console.log(await getAllClientNameAndSalesManager());
+
+import { 
+    getAllPaymentsFromPayPalEachYear,
+getPaymentByClientCode, getAllPaymentsMethods, getClientPayments_At_2008
+} from "./module/payments.js";
+
+console.log(await getClientPayments_At_2008())
 
 // import { 
-//     getAllPaymentsFromPayPalEachYear,
-// getPaymentByClientCode, getAllPaymentsMethods
-// } from "./module/payments.js";
-
-// console.log(await getAllPaymentsMethods())
-
-// import { 
-//     getListStatusRequests, getAllClientCodeOrderedBefore,
+//     getListStatusRequests, ,
 //     getAllOrderCodeClientCodeAndOrdersThatHaveNotBeenDeliveredOnTime,
 //     getAllOrderCodeClientCodeAndDeliveryDateLeastTwoDaysBefore, getAllOrdersThatWereRejectedIn2009,
 //     getAllOrdersDeliveredInTheMonthOfJanuaryOfAnyYear
 // } from "./module/request.js";
-// console.log(await getAllOrderCodeClientCodeAndDeliveryDateLeastTwoDaysBefore());
+// console.log(await ());
 
 
-import { 
-    getAllOrnamentalsProducts
-} from "./module/product.js";
+// import { 
+//     getAllOrnamentalsProducts
+// } from "./module/product.js";
 
-console.log(await getAllOrnamentalsProducts())
+// console.log(await getAllOrnamentalsProducts())
 
