@@ -14,12 +14,12 @@
 // } from "./module/clients.js";
 // console.log(await getListClientsPayIn2008());
 
-import { 
-    getAllPaymentsFromPayPalEachYear,
-getPaymentByClientCode, getAllPaymentsMethods
-} from "./module/payments.js";
+// import { 
+//     getAllPaymentsFromPayPalEachYear,
+// getPaymentByClientCode, getAllPaymentsMethods
+// } from "./module/payments.js";
 
-console.log(await getAllPaymentsMethods())
+// console.log(await getAllPaymentsMethods())
 
 // import { 
 //     getListStatusRequests, getAllClientCodeOrderedBefore,
@@ -28,3 +28,11 @@ console.log(await getAllPaymentsMethods())
 //     getAllOrdersDeliveredInTheMonthOfJanuaryOfAnyYear
 // } from "./module/request.js";
 // console.log(await getAllOrderCodeClientCodeAndDeliveryDateLeastTwoDaysBefore());
+
+
+import { 
+    getAllOrnamentalsProducts
+} from "./module/product.js";
+
+console.log(await getAllOrnamentalsProducts())
+
