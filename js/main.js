@@ -14,14 +14,17 @@
 // } from "./module/clients.js";
 // console.log(await getListClientsPayIn2008());
 
-// import { 
-//     getAllPaymentsFromPayPalEachYear 
-// } from "./module/payments.js";
-
 import { 
-    getListStatusRequests, getAllClientCodeOrderedBefore,
-    getAllOrderCodeClientCodeAndOrdersThatHaveNotBeenDeliveredOnTime,
-    getAllOrderCodeClientCodeAndDeliveryDateLeastTwoDaysBefore, getAllOrdersThatWereRejectedIn2009,
-    getAllOrdersDeliveredInTheMonthOfJanuaryOfAnyYear
-} from "./module/request.js";
-console.log(await getAllOrderCodeClientCodeAndDeliveryDateLeastTwoDaysBefore());
+    getAllPaymentsFromPayPalEachYear,
+getPaymentByClientCode, getAllPaymentsMethods
+} from "./module/payments.js";
+
+console.log(await getAllPaymentsMethods())
+
+// import { 
+//     getListStatusRequests, getAllClientCodeOrderedBefore,
+//     getAllOrderCodeClientCodeAndOrdersThatHaveNotBeenDeliveredOnTime,
+//     getAllOrderCodeClientCodeAndDeliveryDateLeastTwoDaysBefore, getAllOrdersThatWereRejectedIn2009,
+//     getAllOrdersDeliveredInTheMonthOfJanuaryOfAnyYear
+// } from "./module/request.js";
+// console.log(await getAllOrderCodeClientCodeAndDeliveryDateLeastTwoDaysBefore());
