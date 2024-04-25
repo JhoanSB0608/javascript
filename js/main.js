@@ -8,10 +8,11 @@
 // console.log(await getEmployeesByCode());
 
 import { 
-    getAllClientNameAndSalesManager, getAllClientNameAndSalesManagerWithPayment, getAllClientNameAndSalesManagerWithoutPayment
+    getAllClientNameAndSalesManager, getAllClientNameAndSalesManagerWithPayment, getAllClientNameAndSalesManagerWithoutPayment,
+    getAllAlreadyClientsPaymentsAndManagerOffices
 } from "./module/clients.js";
 
-console.log(await getAllClientNameAndSalesManagerWithoutPayment());
+console.log(await getAllAlreadyClientsPaymentsAndManagerOffices());
 
 // import { 
 //     getAllPaymentsFromPayPalEachYear,

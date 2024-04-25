@@ -1,4 +1,4 @@
-import { getEmployeesByCode } from './employees.js'; import { getPaymentByClientCode } from './payments.js';
+import { getEmployeesByCode } from './employees.js'; import { getPaymentByClientCode } from './payments.js'; import { getOfficesByCode } from './office.js';
 
 // 6. Devuelve un listado con el nombre de los todos los clientes españoles.
 export const getAllClientsfromSpain = async () => {
@@ -76,6 +76,26 @@ export const getAllClientNameAndSalesManagerWithoutPayment = async () => {
             Manager_name: `${employee.name} ${employee.lastname1} ${employee.lastname2}`,
             Manager_Code: val.code_employee_sales_manager
         })
+    }
+    return dataUpdate;
+}
+
+// 4.Devuelve el nombre de los clientes que han hecho pagos y el nombre de sus representantes junto con la 
+// ciudad de la oficina a la que pertenece el representante.
+
+export const getAllAlreadyClientsPaymentsAndManagerOffices = async() =>{
+    let clients = await getAllClientNameAndSalesManagerWithPayment();
+    let dataUpdate = [];
+    for(const client of clients){
+        let [dataEmployee] = await getEmployeesByCode(client.Manager_Code);
+        let [offices] = await getOfficesByCode(dataEmployee.code_office);
+        if(!dataUpdate.some(elmt => elmt.Client_name == client.Client_name)){
+            dataUpdate.push({
+                Client_name: client.Client_name,
+                Manager_name: `${dataEmployee.name} ${dataEmployee.lastname1} ${dataEmployee.lastname2}`,
+                Manager_City: offices.city
+            })
+        }
     }
     return dataUpdate;
 }
