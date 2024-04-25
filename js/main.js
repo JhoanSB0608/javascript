@@ -9,10 +9,10 @@
 
 import { 
     getAllClientNameAndSalesManager, getAllClientNameAndSalesManagerWithPayment, getAllClientNameAndSalesManagerWithoutPayment,
-    getAllAlreadyClientsPaymentsAndManagerOffices
+    getAllAlreadyClientsPaymentsAndManagerOffices, getAllNotAlreadyClientsPaymentsAndManagerOffices
 } from "./module/clients.js";
 
-console.log(await getAllAlreadyClientsPaymentsAndManagerOffices());
+console.log(await getAllNotAlreadyClientsPaymentsAndManagerOffices());
 
 // import { 
 //     getAllPaymentsFromPayPalEachYear,
