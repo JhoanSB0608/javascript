@@ -62,6 +62,24 @@ export const getAllClientNameAndSalesManagerWithPayment = async () => {
     return dataUpdate;
 }
 
+// 3. Muestra el nombre de los clientes que **no** hayan realizado pagos junto con el nombre de sus representantes de ventas.
+
+export const getAllClientNameAndSalesManagerWithoutPayment = async () => {
+    let res = await fetch("http://localhost:5501/clients").then(res => res.json());
+    let dataUpdate = [];
+    for(const val of res){
+        let [employee] = await getEmployeesByCode(val.code_employee_sales_manager);
+        let [pago] = await getPaymentByClientCode(val.client_code)
+        if(pago == undefined) dataUpdate.push({
+            Client_name: val.client_name,
+            clientCode: val.client_code,
+            Manager_name: `${employee.name} ${employee.lastname1} ${employee.lastname2}`,
+            Manager_Code: val.code_employee_sales_manager
+        })
+    }
+    return dataUpdate;
+}
+
 // 7. Devuelve el nombre de los clientes y el nombre de sus representantes
 // junto con la ciudad de la oficina a la que pertenece el representante.
 export const getAll = async()=>{
