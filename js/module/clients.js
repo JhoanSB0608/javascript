@@ -120,6 +120,25 @@ export const getAllNotAlreadyClientsPaymentsAndManagerOffices = async() =>{
     return dataUpdate;
 }
 
+// 6 Lista la dirección de las oficinas que tengan clientes en Fuenlabrada.
+
+export const getAllOfficeswithFuenlabradaClients = async () =>{
+    let res = await fetch("http://localhost:5501/clients?city=Fuenlabrada").then(res => res.json());
+    let dataUpdate = [];
+    for(const val of res){
+        let [employee] = await getEmployeesByCode(val.code_employee_sales_manager)
+        let {code_office} = employee
+        let [officeDirection] = await getOfficesByCode(code_office)
+        dataUpdate.push({
+            cliente: val.client_name,
+            encargado: `${employee.name} ${employee.lastname1} ${employee.lastname2}`,
+            Oficina: code_office,
+            direccionOficina: `${officeDirection.address1} ${officeDirection.address2}`
+        })
+    }
+    return dataUpdate;
+}
+
 // 7. Devuelve el nombre de los clientes y el nombre de sus representantes
 // junto con la ciudad de la oficina a la que pertenece el representante.
 export const getAll = async()=>{
