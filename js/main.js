@@ -7,18 +7,18 @@
 // } from "./module/employees.js";
 // console.log(await getEmployeesByCode());
 
-// import { 
-//     getAllClientNameAndSalesManager
-// } from "./module/clients.js";
-
-// console.log(await getAllClientNameAndSalesManager());
-
 import { 
-    getAllPaymentsFromPayPalEachYear,
-getPaymentByClientCode, getAllPaymentsMethods, getClientPayments_At_2008
-} from "./module/payments.js";
+    getAllClientNameAndSalesManager, getAllClientNameAndSalesManagerWithPayment
+} from "./module/clients.js";
 
-console.log(await getClientPayments_At_2008())
+console.log(await getAllClientNameAndSalesManagerWithPayment());
+
+// import { 
+//     getAllPaymentsFromPayPalEachYear,
+// getPaymentByClientCode, getAllPaymentsMethods, getClientPayments_At_2008
+// } from "./module/payments.js";
+
+// console.log(await getClientPayments_At_2008())
 
 // import { 
 //     getListStatusRequests, ,
