@@ -4,7 +4,7 @@
 export const getAllOrnamentalsProducts = async () => {
     let res = await fetch("http://localhost:5507/products?gama=Ornamentales&stock_gt=100");
     let data = await res.json();
-    let dataUpdate = data.sort((a,b) => {
+    let dataUpdate = data.sort((a, b) => {
         return b.price_sale - a.price_sale
     })
     return dataUpdate;

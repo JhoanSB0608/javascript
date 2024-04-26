@@ -3,9 +3,10 @@
 //     getAllOficceCityAndMovil, 
 // } from "./module/offices.js";
 import { 
-    getEmployeesByCode, getAllEmployeesAndBossNames
+    getEmployeesByCode, getAllEmployeesAndBossNames,
+    getAllEmployeeBossAndHisBossNames
 } from "./module/employees.js";
-console.log(await getAllEmployeesAndBossNames());
+console.log(await getAllEmployeeBossAndHisBossNames());
 
 // import { 
 //     getAllClientNameAndSalesManager, getAllClientNameAndSalesManagerWithPayment, getAllClientNameAndSalesManagerWithoutPayment,

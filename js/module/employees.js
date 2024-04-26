@@ -1,9 +1,9 @@
 // 3. Devuelve un listado con el nombre, apellidos y email de los empleados 
 // cuyo jefe tiene un código de jefe igual a 7.
-export const getAllFullNameAndEmailsAndBoss = async() =>{
+export const getAllFullNameAndEmailsAndBoss = async () => {
     let res = await fetch("http://localhost:5502/employee?code_boss=7")
     let data = await res.json();
-    let dataUpdate = data.map(val=>{
+    let dataUpdate = data.map(val => {
         return {
             name: val.name,
             fullLastname: `${val.lastname1} ${val.lastname2}`,
@@ -14,18 +14,18 @@ export const getAllFullNameAndEmailsAndBoss = async() =>{
 }
 // 4. Devuelve el nombre del puesto, nombre, apellidos y
 //  email del jefe de la empresa.
-export const getBossFullNameAndEmail = async() =>{
-    let res=await fetch("http://localhost:5502/employee")
-    let data =await res.json();
+export const getBossFullNameAndEmail = async () => {
+    let res = await fetch("http://localhost:5502/employee")
+    let data = await res.json();
     let dataUpdate = []
-    data.forEach(val=>{
-        if(val.code_boss == null){
+    data.forEach(val => {
+        if (val.code_boss == null) {
             dataUpdate.push({
                 position: val.position,
                 name: val.name,
                 fullLastname: `${val.lastname1} ${val.lastname2}`,
                 email: val.email.match(/(?<=\[)[^\[\]]+@[^@\[\]]+(?=\])/)[0]
-    
+
             })
         }
     })
@@ -35,12 +35,12 @@ export const getBossFullNameAndEmail = async() =>{
 //5. Devuelve un listado con el nombre, apellidos y 
 //puesto de aquellos empleados que no sean representantes de ventas.
 
-export const getAllFullNamePositionDiferentSalesRepresentative = async() =>{
-    let res=await fetch("http://localhost:5502/employee?position_ne=Representante Ventas")
-    let data =await res.json();
+export const getAllFullNamePositionDiferentSalesRepresentative = async () => {
+    let res = await fetch("http://localhost:5502/employee?position_ne=Representante Ventas")
+    let data = await res.json();
     let dataUpdate = {}
     data.forEach(val => {
-        if(val.code_boss != null){
+        if (val.code_boss != null) {
             dataUpdate.push({
                 name: val.name,
                 fullLastname: '${val.lastname1} ${val.lastname2}',
@@ -69,9 +69,28 @@ export const getAllEmployeesAndBossNames = async () => {
     return await Promise.all(dataUpdate);
 };
 
+// 9. Devuelve un listado que muestre el nombre de cada empleados, el nombre de su jefe y el nombre del jefe de sus jefe.
+export const getAllEmployeeBossAndHisBossNames = async () => {
+    let res = await fetch('http://localhost:5502/employee').then(res => res.json());
+    let dataUpdate = res.map(async (val) => {
+        if (val.code_boss == null) return { Director_general: `${val.name} ${val.lastname1} ${val.lastname2}` };
+        let [boss] = await getEmployeesByCode(val.code_boss);
+        if (boss.code_boss == null) return {
+            Empleado: `${val.name} ${val.lastname1} ${val.lastname2}`,
+            JefeACargo: `${boss.name} ${boss.lastname1} ${boss.lastname2}`
+        };
+        let [bossBoss] = await getEmployeesByCode(boss.code_boss);
+        return {
+            Empleado: `${val.name} ${val.lastname1} ${val.lastname2}`,
+            JefeACargo: `${boss.name} ${boss.lastname1} ${boss.lastname2}`,
+            JefeDeJefe: `${bossBoss.name} ${bossBoss.lastname1} ${bossBoss.lastname2}`
+        };
+    });
+    return await Promise.all(dataUpdate);
+};
 
 // Obtener toda la informacion del empleado por codigo
-export const getEmployeesByCode = async(code)=>{
+export const getEmployeesByCode = async (code) => {
     let res = await fetch(`http://localhost:5502/employee?employee_code=${code}`)
     let data = await res.json();
     return data
