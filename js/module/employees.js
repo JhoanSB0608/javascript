@@ -51,6 +51,25 @@ export const getAllFullNamePositionDiferentSalesRepresentative = async() =>{
     return dataUpdate
 }
 
+//Consultas Multitabla
+
+// 8.Devuelve un listado con el nombre de los empleados junto con el nombre de sus jefes
+export const getAllEmployeesAndBossNames = async () => {
+    let res = await fetch('http://localhost:5502/employee').then(res => res.json());
+    let dataUpdate = res.map(async (val) => {
+        if (val.code_boss == null) {
+            return { Director_general: val.name + ' ' + val.lastname1 + ' ' + val.lastname2 };
+        }
+        let [boss] = await getEmployeesByCode(val.code_boss);
+        return {
+            Empleado: val.name + ' ' + val.lastname1 + ' ' + val.lastname2,
+            JefeACargo: boss.name + ' ' + boss.lastname1 + ' ' + boss.lastname2
+        };
+    });
+    return await Promise.all(dataUpdate);
+};
+
+
 // Obtener toda la informacion del empleado por codigo
 export const getEmployeesByCode = async(code)=>{
     let res = await fetch(`http://localhost:5502/employee?employee_code=${code}`)
