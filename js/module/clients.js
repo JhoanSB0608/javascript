@@ -1,4 +1,4 @@
-import { getEmployeesByCode } from './employees.js'; import { getPaymentByClientCode } from './payments.js'; import { getOfficesByCode } from './office.js';
+import { getEmployeesByCode } from './employees.js'; import { getPaymentByClientCode } from './payments.js'; import { getOfficesByCode } from './office.js'; import {getAllOrdersByClientCode} from './request.js'
 
 // 6. Devuelve un listado con el nombre de los todos los clientes españoles.
 export const getAllClientsfromSpain = async () => {
@@ -206,4 +206,35 @@ export const getAll = async () => {
 
     }
     return client;
+}
+
+// 10. Devuelve el nombre de los clientes a los que no se les ha entregado a tiempo un pedido.
+export const getAllClientsWithALateDeliveryArrive = async ()=>{
+    let res = await fetch("http://localhost:5501/clients").then(res => res.json());
+    let dataUpdate = res.map(async(val) => {
+        let pedido = await getAllOrdersByClientCode(val.client_code);
+        let devData = []
+        pedido.forEach(elmt => {
+            if(elmt.date_delivery == null) return
+            let stimateDt = elmt.date_wait
+            let arrivedDt = elmt.date_delivery
+            stimateDt = stimateDt.split("-")
+            arrivedDt = arrivedDt.split("-")
+            let mesEsperado =Number(stimateDt[stimateDt.length - 2])
+            let mesEntregado = Number(arrivedDt[arrivedDt.length - 2])
+            let diaEsperado = Number(stimateDt[stimateDt.length - 1])
+            let diaEntregado = Number(arrivedDt[arrivedDt.length - 1])
+            if((mesEntregado > mesEsperado) || (mesEntregado==mesEsperado && diaEntregado > diaEsperado)){
+                devData.push({
+                    Client_name: val.client_name,
+                    Fecha_Estimada: stimateDt.join("-"),
+                    Fecha_Entregada: arrivedDt.join("-")
+                })
+            }
+        })
+        return devData
+    })
+    let newArr = await Promise.all(dataUpdate)
+    newArr = newArr.filter(respo => respo.length > 0)
+    return newArr
 }

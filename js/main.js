@@ -2,19 +2,19 @@
 //     getAllOficceAndCodeCity, 
 //     getAllOficceCityAndMovil, 
 // } from "./module/offices.js";
-import { 
-    getEmployeesByCode, getAllEmployeesAndBossNames,
-    getAllEmployeeBossAndHisBossNames
-} from "./module/employees.js";
-console.log(await getAllEmployeeBossAndHisBossNames());
-
 // import { 
-//     getAllClientNameAndSalesManager, getAllClientNameAndSalesManagerWithPayment, getAllClientNameAndSalesManagerWithoutPayment,
-//     getAllAlreadyClientsPaymentsAndManagerOffices, getAllNotAlreadyClientsPaymentsAndManagerOffices,
-//     getAllOfficeswithFuenlabradaClients
-// } from "./module/clients.js";
+//     getEmployeesByCode, getAllEmployeesAndBossNames,
+//     getAllEmployeeBossAndHisBossNames
+// } from "./module/employees.js";
+// console.log(await getAllEmployeeBossAndHisBossNames());
 
-// console.log(await getAllOfficeswithFuenlabradaClients());
+import { 
+    getAllClientNameAndSalesManager, getAllClientNameAndSalesManagerWithPayment, getAllClientNameAndSalesManagerWithoutPayment,
+    getAllAlreadyClientsPaymentsAndManagerOffices, getAllNotAlreadyClientsPaymentsAndManagerOffices,
+    getAllOfficeswithFuenlabradaClients, getAllClientsWithALateDeliveryArrive
+} from "./module/clients.js";
+
+console.log(await getAllClientsWithALateDeliveryArrive());
 
 // import { 
 //     getAllPaymentsFromPayPalEachYear,
