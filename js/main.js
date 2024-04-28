@@ -8,13 +8,13 @@
 // } from "./module/employees.js";
 // console.log(await getAllEmployeeBossAndHisBossNames());
 
-import { 
-    getAllClientNameAndSalesManager, getAllClientNameAndSalesManagerWithPayment, getAllClientNameAndSalesManagerWithoutPayment,
-    getAllAlreadyClientsPaymentsAndManagerOffices, getAllNotAlreadyClientsPaymentsAndManagerOffices,
-    getAllOfficeswithFuenlabradaClients, getAllClientsWithALateDeliveryArrive
-} from "./module/clients.js";
+// import { 
+//     getAllClientNameAndSalesManager, getAllClientNameAndSalesManagerWithPayment, getAllClientNameAndSalesManagerWithoutPayment,
+//     getAllAlreadyClientsPaymentsAndManagerOffices, getAllNotAlreadyClientsPaymentsAndManagerOffices,
+//     getAllOfficeswithFuenlabradaClients, getAllClientsWithALateDeliveryArrive
+// } from "./module/clients.js";
 
-console.log(await getAllClientsWithALateDeliveryArrive());
+// console.log(await getAllClientsWithALateDeliveryArrive());
 
 // import { 
 //     getAllPaymentsFromPayPalEachYear,
@@ -37,4 +37,10 @@ console.log(await getAllClientsWithALateDeliveryArrive());
 // } from "./module/product.js";
 
 // console.log(await getAllOrnamentalsProducts())
+
+import { 
+    getAllDifferentGammasFromEachClient
+} from "./module/gama.js";
+
+console.log(await getAllDifferentGammasFromEachClient())
 

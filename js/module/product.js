@@ -9,3 +9,10 @@ export const getAllOrnamentalsProducts = async () => {
     })
     return dataUpdate;
 }
+
+//Obtener data de un producto mediante su codigo
+export const getProductByCode = async (code = '') => {
+    let res = await fetch(`http://localhost:5507/products?code_product=${code}`)
+    let data = await res.json()
+    return data
+}
