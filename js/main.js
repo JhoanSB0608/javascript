@@ -2,7 +2,8 @@
 //     getAllOficceAndCodeCity, 
 //     getAllOficceCityAndMovil, 
 // } from "./module/offices.js";
-// import { 
+// 
+//import { 
 //     getEmployeesByCode, getAllEmployeesAndBossNames,
 //     getAllEmployeeBossAndHisBossNames
 // } from "./module/employees.js";
@@ -11,10 +12,10 @@
 // import { 
 //     getAllClientNameAndSalesManager, getAllClientNameAndSalesManagerWithPayment, getAllClientNameAndSalesManagerWithoutPayment,
 //     getAllAlreadyClientsPaymentsAndManagerOffices, getAllNotAlreadyClientsPaymentsAndManagerOffices,
-//     getAllOfficeswithFuenlabradaClients, getAllClientsWithALateDeliveryArrive
+//     getAllOfficeswithFuenlabradaClients, getAllClientsWithALateDeliveryArrive, getAll
 // } from "./module/clients.js";
 
-// console.log(await getAllClientsWithALateDeliveryArrive());
+// console.log(await getAll());
 
 // import { 
 //     getAllPaymentsFromPayPalEachYear,
@@ -38,9 +39,27 @@
 
 // console.log(await getAllOrnamentalsProducts())
 
+// import { 
+//     getAllDifferentGammasFromEachClient
+// } from "./module/gama.js";
+
+// console.log(await getAllDifferentGammasFromEachClient())
+
 import { 
-    getAllDifferentGammasFromEachClient
-} from "./module/gama.js";
+    getAllOfficesCodeAndCity, 
+    getAllOfficesFromSpainCityAndMovil 
+} from "./module/offices.js";
 
-console.log(await getAllDifferentGammasFromEachClient())
+import { 
+    getAllEmployeesWithBossAndCodeSeven,
+    getBossFullNameAndEmail,
+    getAllEmployeesNotSalesReps,
+    getAll3,
+    getAll
+} from "./module/employees.js";
+import { 
+    getAll2,
+    getClientsEmploy
+} from "./module/clients.js";
 
+console.log(await getAll());
