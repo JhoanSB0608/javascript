@@ -13,6 +13,26 @@ export const getAllClientsfromSpain = async () => {
     return dataUpdate;
 }
 
+
+//8. Devuelve un listado con el código de cliente de aquellos clientes que realizaron algún pago en 2008. 
+// Tenga en cuenta que deberá eliminar aquellos códigos de cliente que aparezcan repetidos. Resuelva la consulta
+
+export const getClientPayments_At_2008 = async () => {
+    let res = await fetch("http://localhost:5506/payments")
+    let data = await res.json();
+    let dataUpdate = []
+    let clientCodesSet = new Set();
+    data.forEach(val => {
+        let [year] = val.date_payment.split("-");
+        if (year == 2008 && !clientCodesSet.has(val.code_client)) {
+            dataUpdate.push({ ClientCode: val.code_client, fecha: val.date_payment });
+            clientCodesSet.add(val.code_client)
+        }
+    });
+    return dataUpdate
+}
+
+
 // 16. Devuelve un listado con todos los clientes que sean de la 
 // ciudad de Madrid y cuyo representante de ventas tenga el código 
 // de empleado 11 o 30.
@@ -184,26 +204,12 @@ export const getAll = async () => {
             ...officeUpdate
         } = office
         let data = { ...clientUpdate, ...employeeUpdate, ...officeUpdate }
-        // {  
-        //     client_code: 38,
-        //     client_name: 'El Jardin Viviente S.L',
-        //     contact_name: 'Justin',
-        //     contact_lastname: 'Smith',
-        //     code_employee_sales_manager: 31,
-        //     employee_code: 31,
-        //     name: 'Mariko',
-        //     lastname1: 'Kishi',
-        //     lastname2: '',
-        //     code_office: 'SYD-AU',
-        //     city: 'Sydney'
-        //   }
         client[i] = {
             client_name: `${data.client_name}`,
             employees_full_name: `${data.name} ${data.lastname1} ${data.lastname2}`,
             employees_office_code: data.code_office,
-            city_employees: data.city
+            city_client: data.city
         }
-
     }
     return client;
 }
