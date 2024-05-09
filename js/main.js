@@ -49,7 +49,7 @@
 
 import { 
     getAllClientNameAndSalesManager, getAllClientsFromCityAndCode, getAll,
-    getAllNotAlreadyClientsPaymentsAndManagerOffices
+    getAllNotAlreadyClientsPaymentsAndManagerOffices, getAllClientsWithALateDeliveryArrive
 } from "./module/clients.js";
 
-console.log(await getAllNotAlreadyClientsPaymentsAndManagerOffices());
+console.log(await getAllClientsWithALateDeliveryArrive());

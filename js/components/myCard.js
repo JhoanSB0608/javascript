@@ -5,6 +5,8 @@ import {
     getAllClientNameAndSalesManagerWithoutPayment,
     getAllAlreadyClientsPaymentsAndManagerOffices,
     getAllNotAlreadyClientsPaymentsAndManagerOffices,
+    getAllOfficeswithFuenlabradaClients,
+    getAllClientsWithALateDeliveryArrive,
 } from "../module/clients.js";
 import {
     getAllEmployNotClients 
@@ -185,7 +187,48 @@ export class Mycard extends HTMLElement{
             `;
         });
     }
-    
+    async getAllOfficeswithFuenlabradaClientsDesign(){
+        let data = await getAllOfficeswithFuenlabradaClients();
+        data.forEach(val => {
+            this.shadowRoot.innerHTML += /*html*/`
+            
+                <div class="report__card">
+                    <div class="card__title">
+                        <div>Cliente y Manager</div>
+                    </div>
+                    <div class="card__body">
+                        <div class="body__marck">
+                            <p><b>Nombre del cliente: </b> ${val.cliente}</p>
+                            <p><b>Nombre del representante: </b>${val.encargado} </p>
+                            <p><b>Oficina: </b>${val.Oficina} </p>
+                            <p><b>Direccion de la oficina: </b>${val.direccionOficina} </p>
+                        </div>
+                    </div>
+                </div>
+            `;
+        });
+    }
+    async getAllClientsWithALateDeliveryArriveDesign(){
+        let data = await getAllClientsWithALateDeliveryArrive();
+        data.forEach(val => {
+            this.shadowRoot.innerHTML += /*html*/`
+            
+                <div class="report__card">
+                    <div class="card__title">
+                        <div>Cliente y Manager</div>
+                    </div>
+                    <div class="card__body">
+                        <div class="body__marck">
+                            <p><b>Nombre del cliente: </b> ${val.Client_name}</p>
+                            <p><b>Fecha estimada: </b>${val.Fecha_Estimada} </p>
+                            <p><b>Fecha entregada: </b>${val.Fecha_Entregada} </p>
+                        </div>
+                    </div>
+                </div>
+            `;
+        });
+    }
+
     static get observedAttributes() {
         return ["logic"];
     }
@@ -198,5 +241,8 @@ export class Mycard extends HTMLElement{
         if(name=="logic" && now=="client_3") this.getAllClientNameAndSalesManagerWithoutPaymentDesign()
         if(name=="logic" && now=="client_4") this.getAllAlreadyClientsPaymentsAndManagerOfficesDesign()
         if(name=="logic" && now=="client_5") this.getAllNotAlreadyClientsPaymentsAndManagerOfficesDesign()
+        if(name=="logic" && now=="client_6") this.getAllOfficeswithFuenlabradaClientsDesign()
+        if(name=="logic" && now=="client_7") this.getAllClientsWithALateDeliveryArriveDesign()
+        
     }
 }

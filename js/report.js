@@ -19,7 +19,10 @@ btn.forEach(val =>{
                 <my-details logic="client_2" text="2. Muestra el nombre de los clientes que hayan realizado pagos junto con el nombre de sus representantes de ventas."></my-details>
                 <my-details logic="client_3" text="3. Muestra el nombre de los clientes que **no** hayan realizado pagos junto con el nombre de sus representantes de ventas."></my-details> 
                 <my-details logic="client_4" text="4.Devuelve el nombre de los clientes que han hecho pagos y el nombre de sus representantes junto con la ciudad de la oficina a la que pertenece el representante."></my-details>
-                <my-details logic="client_5" text="5.Devuelve el nombre de los clientes que no hayan hecho pagos y el nombre de sus representantes junto con la ciudad de la oficina a la que pertenece el representante."></my-details>                      
+                <my-details logic="client_5" text="5.Devuelve el nombre de los clientes que no hayan hecho pagos y el nombre de sus representantes junto con la ciudad de la oficina a la que pertenece el representante."></my-details>
+                <my-details logic="client_6" text="6 Lista la dirección de las oficinas que tengan clientes en Fuenlabrada. "></my-details>
+                <my-details logic="client_7" text="10. Devuelve el nombre de los clientes a los que no se les ha entregado a tiempo un pedido.   "></my-details>
+                                
                 `
         }
         if(e.target.innerHTML=="employees"){
