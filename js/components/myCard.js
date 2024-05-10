@@ -1,5 +1,5 @@
 import { 
-    getAllClientsFromCityAndCode, 
+    getAllClientsFromCityAndCode, getAllClientsfromSpain,
     getAll, getAllClientNameAndSalesManager,
     getAllClientNameAndSalesManagerWithPayment,
     getAllClientNameAndSalesManagerWithoutPayment,
@@ -26,7 +26,7 @@ export class Mycard extends HTMLElement{
             this.shadowRoot.innerHTML += /*html*/`
                 <div class="report__card">
                     <div class="card__title">
-                        <div>${val.client_name}</div>
+                        <div>${val.client_name} y Oficina a la que pertenece el representante</div>
                     </div>
                     <div class="card__body">
                         <div class="body__marck">
@@ -112,7 +112,7 @@ export class Mycard extends HTMLElement{
             
                 <div class="report__card">
                     <div class="card__title">
-                        <div>Cliente y Manager</div>
+                        <div>Clientes que han realizado pagos y sus representantes de ventas</div>
                     </div>
                     <div class="card__body">
                         <div class="body__marck">
@@ -133,7 +133,7 @@ export class Mycard extends HTMLElement{
             
                 <div class="report__card">
                     <div class="card__title">
-                        <div>Cliente y Manager</div>
+                        <div>Clientes que NO han realizado pagos y sus representantes de ventas</div>
                     </div>
                     <div class="card__body">
                         <div class="body__marck">
@@ -154,7 +154,7 @@ export class Mycard extends HTMLElement{
             
                 <div class="report__card">
                     <div class="card__title">
-                        <div>Cliente y Manager</div>
+                        <div>Clientes que han realizado pagos, sus representantes de ventas y ciudad de la oficina</div>
                     </div>
                     <div class="card__body">
                         <div class="body__marck">
@@ -174,7 +174,7 @@ export class Mycard extends HTMLElement{
             
                 <div class="report__card">
                     <div class="card__title">
-                        <div>Cliente y Manager</div>
+                        <div>Clientes que NO han realizado pagos, sus representantes de ventas y ciudad de la oficina</div>
                     </div>
                     <div class="card__body">
                         <div class="body__marck">
@@ -194,7 +194,7 @@ export class Mycard extends HTMLElement{
             
                 <div class="report__card">
                     <div class="card__title">
-                        <div>Cliente y Manager</div>
+                        <div>Dirección de las oficinas con clientes en Fuenlabrada</div>
                     </div>
                     <div class="card__body">
                         <div class="body__marck">
@@ -214,13 +214,31 @@ export class Mycard extends HTMLElement{
             this.shadowRoot.innerHTML += /*html*/`
                 <div class="report__card">
                     <div class="card__title">
-                        <div>Cliente y Manager</div>
+                        <div>Clientes a los que no se les ha entregado a tiempo un pedido</div>
                     </div>
                     <div class="card__body">
                         <div class="body__marck">
                             <p><b>Nombre del cliente: </b> ${val[0].Client_name}</p>
                             <p><b>Fecha estimada: </b>${val[0].Fecha_Estimada} </p>
                             <p><b>Fecha entregada: </b>${val[0].Fecha_Entregada} </p>
+                        </div>
+                    </div>
+                </div>
+            `;
+        });
+    }
+    async getAllClientsfromSpainDesign(){
+        let data = await getAllClientsfromSpain();
+        data.forEach(val => {
+            this.shadowRoot.innerHTML += /*html*/`
+                <div class="report__card">
+                    <div class="card__title">
+                        <div>Clientes Españoles</div>
+                    </div>
+                    <div class="card__body">
+                        <div class="body__marck">
+                            <p><b>Nombre del cliente: </b> ${val.name}</p>
+                            <p><b>Pais: </b>${val.country} </p>
                         </div>
                     </div>
                 </div>
@@ -242,6 +260,7 @@ export class Mycard extends HTMLElement{
         if(name=="logic" && now=="client_5") this.getAllNotAlreadyClientsPaymentsAndManagerOfficesDesign()
         if(name=="logic" && now=="client_6") this.getAllOfficeswithFuenlabradaClientsDesign()
         if(name=="logic" && now=="client_7") this.getAllClientsWithALateDeliveryArriveDesign()
+        if(name=="logic" && now=="client_8") this.getAllClientsfromSpainDesign()
         
     }
 }
