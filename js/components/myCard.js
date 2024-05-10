@@ -246,14 +246,13 @@ export class Mycard extends HTMLElement{
             `;
         });
     }
-
     async getClientPayments_At_2008Design(){
         let data = await getClientPayments_At_2008();
         data.forEach(val => {
             this.shadowRoot.innerHTML += /*html*/`
                 <div class="report__card">
                     <div class="card__title">
-                        <div>Clientes Españoles</div>
+                        <div>Clientes que realizaron algún pago en 2008</div>
                     </div>
                     <div class="card__body">
                         <div class="body__marck">
@@ -265,7 +264,6 @@ export class Mycard extends HTMLElement{
             `;
         });
     }
-    
     static get observedAttributes() {
         return ["logic"];
     }
