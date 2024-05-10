@@ -15,6 +15,10 @@ import {
     getAllEmployeesAndBossNames, getAllEmployeeBossAndHisBossNames,
 } from "../module/employees.js";
 
+import {
+    getAllDifferentGammasFromEachClient
+} from "../module/gama.js"
+
 export class Mycard extends HTMLElement{
     constructor(){
         super();
@@ -361,6 +365,24 @@ export class Mycard extends HTMLElement{
             `;
         });
     }
+    async getAllDifferentGammasFromEachClientDesign(){
+        let data = await getAllDifferentGammasFromEachClient();
+        data.forEach(val => {
+            this.shadowRoot.innerHTML += /*html*/`
+                <div class="report__card">
+                    <div class="card__title">
+                        <div>Nombre del empleado y nombre del jefe de su jefe</div>
+                    </div>
+                    <div class="card__body">
+                        <div class="body__marck">
+                            <p><b>Codigo del cliente: </b> ${val.codigoCliente}</p>
+                            <p><b>Diferentes gamas de un producto: </b>${val.gamasDistintas} </p>
+                        </div>
+                    </div>
+                </div>
+            `;
+        });
+    }
     
     static get observedAttributes() {
         return ["logic"];
@@ -383,5 +405,7 @@ export class Mycard extends HTMLElement{
         if(name=="logic" && now=="employ_4") this.getAllEmployeesAndBossNamesDesign()
         if(name=="logic" && now=="employ_5") this.getAllEmployeeBossAndHisBossNamesDesign()
         if(name=="logic" && now=="employ_6") this.getAllEmployNotClientsDesign()
+        if(name=="logic" && now=="gama_1") this.getAllDifferentGammasFromEachClientDesign()
+        
     }
 }

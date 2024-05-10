@@ -39,17 +39,17 @@
 
 // console.log(await getAllOrnamentalsProducts())
 
-// import { 
-//     getAllDifferentGammasFromEachClient
-// } from "./module/gama.js";
-
-// console.log(await getAllDifferentGammasFromEachClient())
-
-
-
 import { 
-    getAllFullNamePositionDiferentSalesRepresentative, getAllEmployeesAndBossNames,
-    getAllEmployNotClients
-} from "./module/employees.js";
+    getAllDifferentGammasFromEachClient
+} from "./module/gama.js";
 
-console.log(await getAllEmployNotClients());
+console.log(await getAllDifferentGammasFromEachClient())
+
+
+
+// import { 
+//     getAllFullNamePositionDiferentSalesRepresentative, getAllEmployeesAndBossNames,
+//     getAllEmployNotClients
+// } from "./module/employees.js";
+
+// console.log(await getAllEmployNotClients());

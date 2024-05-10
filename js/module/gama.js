@@ -11,6 +11,7 @@ export const getAllDifferentGammasFromEachClient = async ()=>{
         orden.forEach((val, i) => {
             ordenes.push({
                 codeClient: client_code,
+                nombreCliente: val.name,
                 code_request: val.code_request
             })
         });

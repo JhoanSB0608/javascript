@@ -6,12 +6,12 @@ import { Mydetails } from "./components/myDetails.js";
 let btn = document.querySelectorAll("button")
 let report__menu = document.querySelectorAll(".report__menu button")
 let report__details = document.querySelector(".report__details")
-btn.forEach(val =>{
-    val.addEventListener("click", (e)=>{
-        for(let val of report__menu) val.classList.remove('report__active');
+btn.forEach(val => {
+    val.addEventListener("click", (e) => {
+        for (let val of report__menu) val.classList.remove('report__active');
         e.target.classList.add("report__active")
-        
-        if(e.target.innerHTML=="clients"){
+
+        if (e.target.innerHTML == "clients") {
             report__details.innerHTML = /*html*/`
                 <my-details logic="client_8" text="1. Devuelve un listado con el nombre de los todos los clientes españoles."></my-details>
                 <my-details logic="client_9" text="2. Devuelve un listado con el código de cliente de aquellos clientes que realizaron algún pago en 2008. Tenga en cuenta que deberá eliminar aquellos códigos de cliente que aparezcan repetidos. Resuelva la consulta"></my-details>
@@ -27,7 +27,7 @@ btn.forEach(val =>{
                                 
                 `
         }
-        if(e.target.innerHTML=="employees"){
+        if (e.target.innerHTML == "employees") {
             report__details.innerHTML = /*html*/`
                 <my-details logic="employ_1" text="1. Devuelve un listado con el nombre, apellidos y email de los empleados cuyo jefe tiene un código de jefe igual a 7."></my-details>
                 <my-details logic="employ_2" text="2. Devuelve el nombre del puesto, nombre, apellidos y email del jefe de la empresa."></my-details>
@@ -35,6 +35,11 @@ btn.forEach(val =>{
                 <my-details logic="employ_4" text="4. Devuelve un listado con el nombre de los empleados junto con el nombre de sus jefes"></my-details>
                 <my-details logic="employ_5" text="5. Devuelve un listado que muestre el nombre de cada empleados, el nombre de su jefe y el nombre del jefe de sus jefe."></my-details>
                 <my-details logic="employ_6" text="6. Devuelve un listado con los datos de los empleados que no  tienen clientes asociados y el nombre de su jefe asociado"></my-details>
+            `;
+        }
+        if (e.target.innerHTML == "gama") {
+            report__details.innerHTML = /*html*/`
+                <my-details logic="gama_1" text="1. Devuelve un listado de las diferentes gamas de producto que ha comprado cada cliente.></my-details>
             `;
         }
 
