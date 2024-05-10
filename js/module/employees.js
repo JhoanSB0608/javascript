@@ -1,3 +1,5 @@
+import { getAllClients } from './clients.js';
+
 // 3. Devuelve un listado con el nombre, apellidos y email de los empleados 
 // cuyo jefe tiene un código de jefe igual a 7.
 export const getAllFullNameAndEmailsAndBoss = async () => {
@@ -12,6 +14,7 @@ export const getAllFullNameAndEmailsAndBoss = async () => {
     })
     return dataUpdate;
 }
+
 // 4. Devuelve el nombre del puesto, nombre, apellidos y
 //  email del jefe de la empresa.
 export const getBossFullNameAndEmail = async () => {
@@ -32,13 +35,13 @@ export const getBossFullNameAndEmail = async () => {
     return dataUpdate
 }
 
-//5. Devuelve un listado con el nombre, apellidos y 
-//puesto de aquellos empleados que no sean representantes de ventas.
+// 5. Devuelve un listado con el nombre, apellidos y 
+// puesto de aquellos empleados que no sean representantes de ventas.
 
 export const getAllFullNamePositionDiferentSalesRepresentative = async () => {
     let res = await fetch("http://localhost:5502/employee?position_ne=Representante Ventas")
     let data = await res.json();
-    let dataUpdate = []; // Inicializa dataUpdate como un array vacío en lugar de un objeto
+    let dataUpdate = [];
     data.forEach(val => {
         if (val.code_boss != null) {
             dataUpdate.push({
@@ -51,9 +54,9 @@ export const getAllFullNamePositionDiferentSalesRepresentative = async () => {
     return dataUpdate;
 }
 
-//Consultas Multitabla
+// Consultas Multitabla
 
-// 8.Devuelve un listado con el nombre de los empleados junto con el nombre de sus jefes
+// 8. Devuelve un listado con el nombre de los empleados junto con el nombre de sus jefes
 export const getAllEmployeesAndBossNames = async () => {
     let res = await fetch('http://localhost:5502/employee').then(res => res.json());
     let dataUpdate = res.map(async (val) => {
@@ -69,7 +72,7 @@ export const getAllEmployeesAndBossNames = async () => {
     return await Promise.all(dataUpdate);
 };
 
-// 9. Devuelve un listado que muestre el nombre de cada empleados, el nombre de su jefe y el nombre del jefe de sus jefe.
+// 9. Devuelve un listado que muestre el nombre de cada empleado, el nombre de su jefe y el nombre del jefe de su jefe.
 export const getAllEmployeeBossAndHisBossNames = async () => {
     let res = await fetch('http://localhost:5502/employee').then(res => res.json());
     let dataUpdate = res.map(async (val) => {
@@ -93,7 +96,7 @@ export const getAllEmployeeBossAndHisBossNames = async () => {
 // 12. Devuelve un listado con los datos de los empleados que no 
 // tienen clientes asociados y el nombre de su jefe asociado
 
-export const getAllEmployNotClients = async()=>{
+export const getAllEmployNotClients = async () => {
     let dataClients = await getAllClients();
     let dataEmployees = await getAllEmploy();
     let code_employee_sales_manager = [...new Set(dataClients.map(val => val.code_employee_sales_manager))]
@@ -105,9 +108,9 @@ export const getAllEmployNotClients = async()=>{
     let code = codes.reduce((resultado, array) => resultado.filter(elemento => !array.includes(elemento)).concat(array.filter(elemento => !resultado.includes(elemento))))
     let employees = []
     for (let i = 0; i < code.length; i++) {
-        let searchingEmployees = async() => await getEmployByCode(code[i])
+        let searchingEmployees = async() => await getEmployeesByCode(code[i])
         let [employee] = await searchingEmployees()
-        if(!employee.code_boss) {
+        if (!employee.code_boss) {
             let {
                 code_boss,
                 ...employeeUpdate
@@ -116,7 +119,7 @@ export const getAllEmployNotClients = async()=>{
             employees.push(employeeUpdate)
             continue
         }
-        let searchedBoss = async() => await getEmployByCode(employee.code_boss)
+        let searchedBoss = async() => await getEmployeesByCode(employee.code_boss)
         let [boos] = await searchedBoss()
         let {
             code_boss,
@@ -128,9 +131,16 @@ export const getAllEmployNotClients = async()=>{
     return employees
 }
 
-// Obtener toda la informacion del empleado por codigo
+// Obtener toda la información del empleado por código
 export const getEmployeesByCode = async (code) => {
     let res = await fetch(`http://localhost:5502/employee?employee_code=${code}`)
     let data = await res.json();
     return data
+}
+
+// Obtener la información de un empleado por su código
+export const getAllEmploy = async () => {
+    let res = await fetch(`http://localhost:5502/employee`);
+    let data = await res.json();
+    return data;
 }

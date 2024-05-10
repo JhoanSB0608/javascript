@@ -245,3 +245,9 @@ export const getAllClientsWithALateDeliveryArrive = async ()=>{
     newArr = newArr.filter(respo => respo.length > 0)
     return newArr
 }
+
+export const getAllClients = async() =>{
+    let res = await fetch(`http://localhost:5501/clients`);
+    let data = await res.json();
+    return data;
+}

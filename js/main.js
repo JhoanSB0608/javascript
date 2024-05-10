@@ -48,7 +48,8 @@
 
 
 import { 
-    getAllFullNamePositionDiferentSalesRepresentative, getAllEmployeesAndBossNames
+    getAllFullNamePositionDiferentSalesRepresentative, getAllEmployeesAndBossNames,
+    getAllEmployNotClients
 } from "./module/employees.js";
 
-console.log(await getAllEmployeesAndBossNames());
+console.log(await getAllEmployNotClients());
