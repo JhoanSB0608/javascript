@@ -10,7 +10,9 @@ import {
     getClientPayments_At_2008,
 } from "../module/clients.js";
 import {
-    getAllEmployNotClients 
+    getAllEmployNotClients, getAllFullNameAndEmailsAndBoss,
+    getBossFullNameAndEmail, getAllFullNamePositionDiferentSalesRepresentative,
+    getAllEmployeesAndBossNames, getAllEmployeeBossAndHisBossNames,
 } from "../module/employees.js";
 
 export class Mycard extends HTMLElement{
@@ -264,23 +266,122 @@ export class Mycard extends HTMLElement{
             `;
         });
     }
+    async getAllFullNameAndEmailsAndBossDesign(){
+        let data = await getAllFullNameAndEmailsAndBoss();
+        data.forEach(val => {
+            this.shadowRoot.innerHTML += /*html*/`
+                <div class="report__card">
+                    <div class="card__title">
+                        <div>Nombre completo de los empleados cuyos jefes tienen codigo 7</div>
+                    </div>
+                    <div class="card__body">
+                        <div class="body__marck">
+                            <p><b>Nombre del empleado: </b> ${val.name}</p>
+                            <p><b>Apellido del empleado: </b>${val.fullLastname} </p>
+                            <p><b>Email del empleado: </b>${val.email} </p>
+                        </div>
+                    </div>
+                </div>
+            `;
+        });
+    }
+    async getBossFullNameAndEmailDesign(){
+        let data = await getBossFullNameAndEmail();
+        data.forEach(val => {
+            this.shadowRoot.innerHTML += /*html*/`
+                <div class="report__card">
+                    <div class="card__title">
+                        <div>Nombre completo, email y puesto del jefe de la empresa</div>
+                    </div>
+                    <div class="card__body">
+                        <div class="body__marck">
+                            <p><b>Nombre del jefe: </b> ${val.name}</p>
+                            <p><b>Apellido del jefe: </b>${val.fullLastname} </p>
+                            <p><b>Email del jefe: </b>${val.email} </p>
+                            <p><b>Puesto del jefe: </b>${val.position} </p>
+                        </div>
+                    </div>
+                </div>
+            `;
+        });
+    }
+    async getAllFullNamePositionDiferentSalesRepresentativeDesign(){
+        let data = await getAllFullNamePositionDiferentSalesRepresentative();
+        data.forEach(val => {
+            this.shadowRoot.innerHTML += /*html*/`
+                <div class="report__card">
+                    <div class="card__title">
+                        <div>Nombre completo y puesto de los empleados que no son representantes de ventas</div>
+                    </div>
+                    <div class="card__body">
+                        <div class="body__marck">
+                            <p><b>Nombre del empleado: </b> ${val.name}</p>
+                            <p><b>Apellido del empleado: </b>${val.fullLastname} </p>
+                            <p><b>Puesto del empleado: </b>${val.position} </p>
+                        </div>
+                    </div>
+                </div>
+            `;
+        });
+    }
+    async getAllEmployeesAndBossNamesDesign(){
+        let data = await getAllEmployeesAndBossNames();
+        data.forEach(val => {
+            this.shadowRoot.innerHTML += /*html*/`
+                <div class="report__card">
+                    <div class="card__title">
+                        <div>Nombre del empleado y nombre de su jefe</div>
+                    </div>
+                    <div class="card__body">
+                        <div class="body__marck">
+                            <p><b>Nombre del empleado: </b> ${val.Empleado}</p>
+                            <p><b>Nombre del jefe: </b>${val.JefeACargo} </p>
+                        </div>
+                    </div>
+                </div>
+            `;
+        });
+    }
+    async getAllEmployeeBossAndHisBossNamesDesign(){
+        let data = await getAllEmployeeBossAndHisBossNames();
+        data.forEach(val => {
+            this.shadowRoot.innerHTML += /*html*/`
+                <div class="report__card">
+                    <div class="card__title">
+                        <div>Nombre del empleado y nombre del jefe de su jefe</div>
+                    </div>
+                    <div class="card__body">
+                        <div class="body__marck">
+                            <p><b>Nombre del empleado: </b> ${val.Empleado}</p>
+                            <p><b>Nombre del jefe: </b>${val.JefeACargo} </p>
+                            <p><b>Nombre del jefe de su jefe: </b>${val.JefeDeJefe} </p>
+                        </div>
+                    </div>
+                </div>
+            `;
+        });
+    }
+    
     static get observedAttributes() {
         return ["logic"];
     }
     attributeChangedCallback(name, old, now) {
         if(name=="logic" && now=="client_6") this.getAllDesign()
         if(name=="logic" && now=="client_16") this.getAllClientsFromCityAndCodeDesign()
-        if(name=="logic" && now=="employ_12") this.getAllEmployNotClientsDesign()
         if(name=="logic" && now=="client_1") this.getAllClientNameAndSalesManagerDesign()
         if(name=="logic" && now=="client_2") this.getAllClientNameAndSalesManagerWithPaymentDesign()
         if(name=="logic" && now=="client_3") this.getAllClientNameAndSalesManagerWithoutPaymentDesign()
         if(name=="logic" && now=="client_4") this.getAllAlreadyClientsPaymentsAndManagerOfficesDesign()
         if(name=="logic" && now=="client_5") this.getAllNotAlreadyClientsPaymentsAndManagerOfficesDesign()
-        if(name=="logic" && now=="client_6") this.getAllOfficeswithFuenlabradaClientsDesign()
+        if(name=="logic" && now=="client_10") this.getAllOfficeswithFuenlabradaClientsDesign()
         if(name=="logic" && now=="client_7") this.getAllClientsWithALateDeliveryArriveDesign()
         if(name=="logic" && now=="client_8") this.getAllClientsfromSpainDesign()
         if(name=="logic" && now=="client_9") this.getClientPayments_At_2008Design()
-
-        
+        if(name=="logic" && now=="employ_1") this.getAllFullNameAndEmailsAndBossDesign()
+        if(name=="logic" && now=="employ_2") this.getBossFullNameAndEmailDesign()
+        if(name=="logic" && now=="employ_3") this.getAllFullNamePositionDiferentSalesRepresentativeDesign()
+        if(name=="logic" && now=="employ_4") this.getAllEmployeesAndBossNamesDesign()
+        if(name=="logic" && now=="employ_5") this.getAllEmployeeBossAndHisBossNamesDesign()
+        if(name=="logic" && now=="employ_6") this.getAllEmployNotClientsDesign()
     }
 }

@@ -38,17 +38,17 @@ export const getBossFullNameAndEmail = async () => {
 export const getAllFullNamePositionDiferentSalesRepresentative = async () => {
     let res = await fetch("http://localhost:5502/employee?position_ne=Representante Ventas")
     let data = await res.json();
-    let dataUpdate = {}
+    let dataUpdate = []; // Inicializa dataUpdate como un array vacío en lugar de un objeto
     data.forEach(val => {
         if (val.code_boss != null) {
             dataUpdate.push({
                 name: val.name,
-                fullLastname: '${val.lastname1} ${val.lastname2}',
+                fullLastname: `${val.lastname1} ${val.lastname2}`,
                 position: val.position,
-            })
+            });
         }
     });
-    return dataUpdate
+    return dataUpdate;
 }
 
 //Consultas Multitabla
@@ -58,11 +58,11 @@ export const getAllEmployeesAndBossNames = async () => {
     let res = await fetch('http://localhost:5502/employee').then(res => res.json());
     let dataUpdate = res.map(async (val) => {
         if (val.code_boss == null) {
-            return { Director_general: val.name + ' ' + val.lastname1 + ' ' + val.lastname2 };
+            return { Director_general: `${val.name} ${val.lastname1} ${val.lastname2}`};
         }
         let [boss] = await getEmployeesByCode(val.code_boss);
         return {
-            Empleado: val.name + ' ' + val.lastname1 + ' ' + val.lastname2,
+            Empleado: `${val.name} ${val.lastname1} ${val.lastname2}`,
             JefeACargo: boss.name + ' ' + boss.lastname1 + ' ' + boss.lastname2
         };
     });

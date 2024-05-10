@@ -48,8 +48,7 @@
 
 
 import { 
-    getAllClientNameAndSalesManager, getAllClientsFromCityAndCode, getAll, getClientPayments_At_2008,
-    getAllNotAlreadyClientsPaymentsAndManagerOffices, getAllClientsWithALateDeliveryArrive
-} from "./module/clients.js";
+    getAllFullNamePositionDiferentSalesRepresentative, getAllEmployeesAndBossNames
+} from "./module/employees.js";
 
-console.log(await getClientPayments_At_2008());
+console.log(await getAllEmployeesAndBossNames());
