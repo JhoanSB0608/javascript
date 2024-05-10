@@ -7,6 +7,7 @@ import {
     getAllNotAlreadyClientsPaymentsAndManagerOffices,
     getAllOfficeswithFuenlabradaClients,
     getAllClientsWithALateDeliveryArrive,
+    getClientPayments_At_2008,
 } from "../module/clients.js";
 import {
     getAllEmployNotClients 
@@ -246,6 +247,25 @@ export class Mycard extends HTMLElement{
         });
     }
 
+    async getClientPayments_At_2008Design(){
+        let data = await getClientPayments_At_2008();
+        data.forEach(val => {
+            this.shadowRoot.innerHTML += /*html*/`
+                <div class="report__card">
+                    <div class="card__title">
+                        <div>Clientes Españoles</div>
+                    </div>
+                    <div class="card__body">
+                        <div class="body__marck">
+                            <p><b>Codigo del cliente: </b> ${val.ClientCode}</p>
+                            <p><b>Fecha: </b>${val.fecha} </p>
+                        </div>
+                    </div>
+                </div>
+            `;
+        });
+    }
+    
     static get observedAttributes() {
         return ["logic"];
     }
@@ -261,6 +281,8 @@ export class Mycard extends HTMLElement{
         if(name=="logic" && now=="client_6") this.getAllOfficeswithFuenlabradaClientsDesign()
         if(name=="logic" && now=="client_7") this.getAllClientsWithALateDeliveryArriveDesign()
         if(name=="logic" && now=="client_8") this.getAllClientsfromSpainDesign()
+        if(name=="logic" && now=="client_9") this.getClientPayments_At_2008Design()
+
         
     }
 }

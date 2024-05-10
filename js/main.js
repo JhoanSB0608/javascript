@@ -48,8 +48,8 @@
 
 
 import { 
-    getAllClientNameAndSalesManager, getAllClientsFromCityAndCode, getAll,
+    getAllClientNameAndSalesManager, getAllClientsFromCityAndCode, getAll, getClientPayments_At_2008,
     getAllNotAlreadyClientsPaymentsAndManagerOffices, getAllClientsWithALateDeliveryArrive
 } from "./module/clients.js";
 
-console.log(await getAllClientsWithALateDeliveryArrive());
+console.log(await getClientPayments_At_2008());

@@ -14,6 +14,7 @@ btn.forEach(val =>{
         if(e.target.innerHTML=="clients"){
             report__details.innerHTML = /*html*/`
                 <my-details logic="client_8" text="1. Devuelve un listado con el nombre de los todos los clientes españoles."></my-details>
+                <my-details logic="client_9" text="2. Devuelve un listado con el código de cliente de aquellos clientes que realizaron algún pago en 2008. Tenga en cuenta que deberá eliminar aquellos códigos de cliente que aparezcan repetidos. Resuelva la consulta"></my-details>
                 <my-details logic="client_6" text="4. Devuelve el nombre de los clientes y el nombre de sus representantes junto con la ciudad de la oficina a la que pertenece el representante."></my-details>
                 <my-details logic="client_16" text="5. Devuelve un listado con todos los clientes que sean de la ciudad de Madrid y cuyo representante de ventas tenga el código de empleado 11 o 30."></my-details>
                 <my-details logic="client_1" text="6.Obtén un listado con el nombre de cada cliente y el nombre y apellido de su representante de ventas."></my-details>
