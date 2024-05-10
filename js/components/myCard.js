@@ -212,16 +212,15 @@ export class Mycard extends HTMLElement{
         let data = await getAllClientsWithALateDeliveryArrive();
         data.forEach(val => {
             this.shadowRoot.innerHTML += /*html*/`
-            
                 <div class="report__card">
                     <div class="card__title">
                         <div>Cliente y Manager</div>
                     </div>
                     <div class="card__body">
                         <div class="body__marck">
-                            <p><b>Nombre del cliente: </b> ${val.Client_name}</p>
-                            <p><b>Fecha estimada: </b>${val.Fecha_Estimada} </p>
-                            <p><b>Fecha entregada: </b>${val.Fecha_Entregada} </p>
+                            <p><b>Nombre del cliente: </b> ${val[0].Client_name}</p>
+                            <p><b>Fecha estimada: </b>${val[0].Fecha_Estimada} </p>
+                            <p><b>Fecha entregada: </b>${val[0].Fecha_Entregada} </p>
                         </div>
                     </div>
                 </div>

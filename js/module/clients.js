@@ -226,7 +226,7 @@ export const getAllClientsWithALateDeliveryArrive = async ()=>{
             let arrivedDt = elmt.date_delivery
             stimateDt = stimateDt.split("-")
             arrivedDt = arrivedDt.split("-")
-            let mesEsperado =Number(stimateDt[stimateDt.length - 2])
+            let mesEsperado = Number(stimateDt[stimateDt.length - 2])
             let mesEntregado = Number(arrivedDt[arrivedDt.length - 2])
             let diaEsperado = Number(stimateDt[stimateDt.length - 1])
             let diaEntregado = Number(arrivedDt[arrivedDt.length - 1])
@@ -234,12 +234,13 @@ export const getAllClientsWithALateDeliveryArrive = async ()=>{
                 devData.push({
                     Client_name: val.client_name,
                     Fecha_Estimada: stimateDt.join("-"),
-                    Fecha_Entregada: arrivedDt.join("-")
+                    Fecha_Entregada: arrivedDt.join("-"),
                 })
             }
         })
         return devData
     })
+
     let newArr = await Promise.all(dataUpdate)
     newArr = newArr.filter(respo => respo.length > 0)
     return newArr
