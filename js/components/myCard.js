@@ -7,7 +7,9 @@ import {
     getAllNotAlreadyClientsPaymentsAndManagerOffices,
     getAllOfficeswithFuenlabradaClients,
     getAllClientsWithALateDeliveryArrive,
-    getClientPayments_At_2008,
+    getClientPayments_At_2008, getAllClientsWhoHaventPaid,
+    getAllClientsWhoHaventRequest, getAllClientsWhoHaveNeitherPaidNorRequest,
+    getAllClientsWhoHaveRequestedButHaventPaid
 } from "../module/clients.js";
 import {
     getAllEmployNotClients, getAllFullNameAndEmailsAndBoss,
@@ -383,7 +385,95 @@ export class Mycard extends HTMLElement{
             `;
         });
     }
-    
+    async getAllClientsWhoHaventPaidDesign(){
+        let data = await getAllClientsWhoHaventPaid();
+        data.forEach(val =>{
+            this.shadowRoot.innerHTML += /*html*/`
+                <div class="report__card">
+                    <div class="card__title">
+                        <div>${val.client_name} # ${val.client_code}</div>
+                    </div>
+                    <div class="card__body">
+                        <div class="body__marck">
+                            <p><b>Id: </b> ${val.id}</p>
+                            <p><b>Nombre de contacto: </b>${val.contact_name} ${val.contact_lastname}</p>
+                            <p><b>Codigo del empleado: </b>${val.code_employee_sales_manager}</p>
+                            <p><b>Contacto: </b>${val.phone} - ${val.fax}</p>
+                            <p><b>Direccion: </b>${val.address1} ${(val.address2) ? val.address2 : ""}</p>
+                            <p><b>Ubicacion: </b>${val.country} ${(val.region) ? val.region : ""} ${val.city} ${val.postal_code}</p>
+                        </div>
+                    </div>
+                </div>
+            `;
+        });
+    }
+    async getAllClientsWhoHaventRequestDesign(){
+        let data = await getAllClientsWhoHaventRequest();
+        data.forEach(val =>{
+            this.shadowRoot.innerHTML += /*html*/`
+                <div class="report__card">
+                    <div class="card__title">
+                        <div>${val.client_name} # ${val.client_code}</div>
+                    </div>
+                    <div class="card__body">
+                        <div class="body__marck">
+                            <p><b>Id: </b> ${val.id}</p>
+                            <p><b>Nombre de contacto: </b>${val.contact_name} ${val.contact_lastname}</p>
+                            <p><b>Codigo del empleado: </b>${val.code_employee_sales_manager}</p>
+                            <p><b>Contacto: </b>${val.phone} - ${val.fax}</p>
+                            <p><b>Direccion: </b>${val.address1} ${(val.address2) ? val.address2 : ""}</p>
+                            <p><b>Ubicacion: </b>${val.country} ${(val.region) ? val.region : ""} ${val.city} ${val.postal_code}</p>
+                        </div>
+                    </div>
+                </div>
+            `;
+        });
+    }
+    async getAllClientsWhoHaveNeitherPaidNorRequestDesign(){
+        let data = await getAllClientsWhoHaveNeitherPaidNorRequest();
+        data.forEach(val =>{
+            this.shadowRoot.innerHTML += /*html*/`
+                <div class="report__card">
+                    <div class="card__title">
+                        <div>${val.client_name} # ${val.client_code}</div>
+                    </div>
+                    <div class="card__body">
+                        <div class="body__marck">
+                            <p><b>Id: </b> ${val.id}</p>
+                            <p><b>Nombre de contacto: </b>${val.contact_name} ${val.contact_lastname}</p>
+                            <p><b>Codigo del empleado: </b>${val.code_employee_sales_manager}</p>
+                            <p><b>Contacto: </b>${val.phone} - ${val.fax}</p>
+                            <p><b>Direccion: </b>${val.address1} ${(val.address2) ? val.address2 : ""}</p>
+                            <p><b>Ubicacion: </b>${val.country} ${(val.region) ? val.region : ""} ${val.city} ${val.postal_code}</p>
+                        </div>
+                    </div>
+                </div>
+            `;
+        });
+    }
+    async getAllClientsWhoHaveRequestedButHaventPaidDesign(){
+        let data = await getAllClientsWhoHaveRequestedButHaventPaid();
+        data.forEach(val =>{
+            this.shadowRoot.innerHTML += /*html*/`
+                <div class="report__card">
+                    <div class="card__title">
+                        <div>${val.client_name} # ${val.client_code}</div>
+                    </div>
+                    <div class="card__body">
+                        <div class="body__marck">
+                            <p><b>Id: </b> ${val.id}</p>
+                            <p><b>Nombre de contacto: </b>${val.contact_name} ${val.contact_lastname}</p>
+                            <p><b>Codigo del empleado: </b>${val.code_employee_sales_manager}</p>
+                            <p><b>Contacto: </b>${val.phone} - ${val.fax}</p>
+                            <p><b>Direccion: </b>${val.address1} ${(val.address2) ? val.address2 : ""}</p>
+                            <p><b>Ubicacion: </b>${val.country} ${(val.region) ? val.region : ""} ${val.city} ${val.postal_code}</p>
+                        </div>
+                    </div>
+                </div>
+            `;
+        });
+    }
+
     static get observedAttributes() {
         return ["logic"];
     }
@@ -399,6 +489,10 @@ export class Mycard extends HTMLElement{
         if(name=="logic" && now=="client_7") this.getAllClientsWithALateDeliveryArriveDesign()
         if(name=="logic" && now=="client_8") this.getAllClientsfromSpainDesign()
         if(name=="logic" && now=="client_9") this.getClientPayments_At_2008Design()
+        if(name=="logic" && now=="client_12") this.getAllClientsWhoHaventPaidDesign()
+        if(name=="logic" && now=="client_13") this.getAllClientsWhoHaventRequestDesign()
+        if(name=="logic" && now=="client_14") this.getAllClientsWhoHaveNeitherPaidNorRequestDesign()
+        if(name=="logic" && now=="client_15") this.getAllClientsWhoHaveRequestedButHaventPaidDesign()
         if(name=="logic" && now=="employ_1") this.getAllFullNameAndEmailsAndBossDesign()
         if(name=="logic" && now=="employ_2") this.getBossFullNameAndEmailDesign()
         if(name=="logic" && now=="employ_3") this.getAllFullNamePositionDiferentSalesRepresentativeDesign()

@@ -40,10 +40,10 @@
 // console.log(await getAllOrnamentalsProducts())
 
 import { 
-    getAllDifferentGammasFromEachClient
-} from "./module/gama.js";
+    getAllEmployeesWithBossNameAndTheBossesNames
+} from "./module/employees.js";
 
-console.log(await getAllDifferentGammasFromEachClient())
+console.log(await getAllEmployeesWithBossNameAndTheBossesNames())
 
 
 

@@ -24,7 +24,11 @@ btn.forEach(val => {
                 <my-details logic="client_5" text="9.Devuelve el nombre de los clientes que no hayan hecho pagos y el nombre de sus representantes junto con la ciudad de la oficina a la que pertenece el representante."></my-details>
                 <my-details logic="client_10" text="10. Lista la dirección de las oficinas que tengan clientes en Fuenlabrada. "></my-details>
                 <my-details logic="client_7" text="11. Devuelve el nombre de los clientes a los que no se les ha entregado a tiempo un pedido.   "></my-details>
-                                
+                <my-details logic="client_12" text="12. Devuelve un listado que muestre solamente los clientes que no han realizado ningún pago. "></my-details>                
+                <my-details logic="client_13" text="13. Devuelve un listado que muestre solamente los clientes que no han realizado ningún pedido. "></my-details>                
+                <my-details logic="client_14" text="14. Devuelve un listado que muestre los clientes que no han realizado ningún pago y los que no han realizado ningún pedido."></my-details>  
+                <my-details logic="client_15" text="15. Devuelve un listado con los clientes que han realizado algún pedido pero no han realizado ningún pago.
+                "></my-details>  
                 `
         }
         if (e.target.innerHTML == "employees") {

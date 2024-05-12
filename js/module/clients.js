@@ -1,5 +1,6 @@
-import { getEmployeesByCode } from './employees.js'; import { getPaymentByClientCode } from './payments.js'; import { getOfficesByCode } from './office.js'; import {getAllOrdersByClientCode} from './request.js'
-import { getAllClientsWhoPaid } from "./payments.js"; import { getAllClientsWhoRequest } from "./requests.js";
+import { getEmployeesByCode } from './employees.js'; import { getPaymentByClientCode, getAllClientsWhoPaid } from './payments.js'; 
+import { getOfficesByCode } from './office.js'; import {getAllOrdersByClientCode, getAllClientsWhoRequest} from './request.js'
+
 // 6. Devuelve un listado con el nombre de los todos los clientes españoles.
 export const getAllClientsfromSpain = async () => {
     let res = await fetch("http://localhost:5501/clients?country=Spain")
@@ -249,7 +250,7 @@ export const getAllClientsWithALateDeliveryArrive = async ()=>{
 //----------------------------------------------------------------------------------
 //1. Devuelve un listado que muestre solamente los clientes que no han realizado ningún pago.O
 export const getAllClientsWhoHaventPaid = async()=>{
-    let res = await fetch(`http://localhost:5501/clients`)
+    let res = await fetch("http://localhost:5501/clients")
     let data = await res.json();
     let dataClient = [];
     for (let i = 0; i < data.length; i++) {
@@ -263,7 +264,7 @@ export const getAllClientsWhoHaventPaid = async()=>{
 
 //2. Devuelve un listado que muestre solamente los clientes que no han realizado ningún pedido.
 export const getAllClientsWhoHaventRequest = async()=>{
-    let res = await fetch(`http://localhost:5501/clients`)
+    let res = await fetch("http://localhost:5501/clients")
     let data = await res.json();
     let dataClient = [];
     for (let i = 0; i < data.length; i++) {
@@ -277,7 +278,7 @@ export const getAllClientsWhoHaventRequest = async()=>{
 
 //3. Devuelve un listado que muestre los clientes que no han realizado ningún pago y los que no han realizado ningún pedido.
 export const getAllClientsWhoHaveNeitherPaidNorRequest = async()=>{
-    let res = await fetch(`http://localhost:5501/clients`)
+    let res = await fetch("http://localhost:5501/clients")
     let data = await res.json();
     let dataClient = [];
     for (let i = 0; i < data.length; i++) {
@@ -292,29 +293,29 @@ export const getAllClientsWhoHaveNeitherPaidNorRequest = async()=>{
 
 //obtener cliente por codigo de asesor de ventas
 export const getAllClientsByManagerCode = async(code)=>{
-    let res = await fetch(`http://localhost:5501/clients?code_employee_sales_manager=${code}`)
+    let res = await fetch("http://localhost:5501/clients?code_employee_sales_manager=${code}")
     let data = await res.json();
     return data;
 }
 
 //11. Devuelve un listado con los clientes que han realizado algún pedido pero no han realizado ningún pago.
-export const getAllClientsWhoHaveRequestedButHaventPaid = async()=>{
-    let res = await fetch(`http://localhost:5501/clients`)
+export const getAllClientsWhoHaveRequestedButHaventPaid = async () => {
+    let res = await fetch("http://localhost:5501/clients");
     let data = await res.json();
-    let dataClient = [];
+    let dataClients = [];
     for (let i = 0; i < data.length; i++) {
-        let [ payments ] = await getAllClientsWhoPaid(data[i].client_code);
-        let [ requests ] = await getAllClientsWhoRequest(data[i].client_code);
-        if(payments === undefined && requests != undefined){
-            dataClient.push(data[i]);
+        let [payments] = await getAllClientsWhoPaid(data[i].client_code);
+        let [requests] = await getAllClientsWhoRequest(data[i].client_code);
+        if (payments === undefined && requests !== undefined) {
+            dataClients.push(data[i]);
         }
     }
-    return dataClient;
+    return dataClients;
 }
 
 
 export const getAllClients = async() =>{
-    let res = await fetch(`http://localhost:5501/clients`);
+    let res = await fetch("http://localhost:5501/clients");
     let data = await res.json();
     return data;
 }
