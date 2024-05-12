@@ -23,6 +23,39 @@ export const getAllOficceCityAndMovil = async () => {
     })
     return dataUpdate
 }
+//-------------------------------------------------------------------------------------
+//6. Lista la dirección de las oficinas que tengan clientes en Fuenlabrada.
+
+export const getAllOfficesAddressWithClientsInFuenlabrada = async()=>{
+    let res = await fetch("http://localhost:5504/offices")
+    let offices = await res.json();
+    let dataUpdate = [];
+    for (let i=0; i<offices.length; i++){
+        let [ clients ] = await getAllClientsInFuenlabrada();
+        let {
+            address1:client_address1,
+            address2:client_address2,
+            ...clientsUpdate} = clients;
+            clients = clientsUpdate
+        let [employee] = await getAllEmployeeNames(clientsUpdate.code_employee_sales_manager);
+        if((employee.code_office == offices[i].code_office)===true){
+            let {...employeeUpdate} = employee;
+            //console.log((employee.code_office == offices[i].code_office)===true)
+            //HAY UN ERROR AQUI
+            //EL ERROR SE BASA EN QUE HACEN CONFLICTO LA DIRECCION DEL CLIENTE Y LA DIRECCION DE LA OFICINA
+            //POR ESO CUANDO SE INTENTA IMPRIMIR SOLO TIRA UNA DIRECCION PERO NO COINCIDE CON LA DIRECCION DE NINGUNA OFICINA
+            let { ...officesUpdate} = offices[i];
+            offices[i] = officesUpdate;
+            //console.log(officesUpdate)
+            let data = { ...clientsUpdate, ...employeeUpdate, ...officesUpdate };
+            dataUpdate.push({
+                "code_office": `${data.code_office}`,
+                "Address": `${data.address1} ${(data.office_address2) ? data.office_address2 : ""}`
+            })
+        }
+    }
+    return dataUpdate;
+}
 
 // Obtener toda la informacion de la oficina por codigo
 export const getOfficesByCode = async (code) => {
