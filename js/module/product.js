@@ -1,38 +1,33 @@
-//15. Devuelve un listado con todos los productos que pertenecen a la gama Ornamentales y que tienen más de 100 unidades en stock. 
-// El listado deberá estar ordenado por su precio de venta, mostrando en primer lugar los de mayor precio.
-
-export const getAllOrnamentalsProducts = async () => {
-    let res = await fetch("http://localhost:5507/products?gama=Ornamentales&stock_gt=100");
+import { getAllRequestDetailsByCode } from "./request_details.js"
+//15. Devuelve un listado con todos los productos que pertenecen a la gama Ornamentales y que tienen más de 100 unidades en stock.
+//El listado deberá estar ordenado por su precio de venta, mostrando en primer lugar los de mayor precio.
+export const getAllOrnamentalProductsWithMoreThan100Stock = async () => {
+    let res = await fetch("http://localhost:5506/products?stock_gt=100&gama=Ornamentales&_sort=-price_sale")
     let data = await res.json();
-    let dataUpdate = data.sort((a, b) => {
-        return b.price_sale - a.price_sale
-    })
-    return dataUpdate;
+    return data;
 }
 
-//-------------------------------------------------------------------------------------------------
-
 //8. Devuelve un listado de los productos que nunca han aparecido en un pedido.
-export const getAllProductsThatNeverHasBeenRequested = async()=>{
+export const getAllProductsThatNeverHasBeenRequested = async () => {
     let res = await fetch("http://localhost:5506/products")
     let data = await res.json();
     let dataUpdate = [];
-    for(let i=0;i<data.length;i++){
-        let [ request_details ] = await getAllRequestDetailsByCode(data[i].code_product);
-        if(request_details===undefined) dataUpdate.push(data[i]);
+    for (let i = 0; i < data.length; i++) {
+        let [request_details] = await getAllRequestDetailsByCode(data[i].code_product);
+        if (request_details === undefined) dataUpdate.push(data[i]);
     }
     return dataUpdate;
 }
 
 //9. Devuelve un listado de los productos que nunca han aparecido en un pedido.
 //El resultado debe mostrar el nombre, la descripción y la imagen del producto.
-export const getAllProductsThatNeverHasBeenRequestedWithItsNDI = async()=>{
+export const getAllProductsThatNeverHasBeenRequestedWithItsNDI = async () => {
     let res = await fetch("http://localhost:5506/products")
     let data = await res.json();
     let dataUpdate = [];
-    for(let i=0;i<data.length;i++){
-        let [ request_details ] = await getAllRequestDetailsByCode(data[i].code_product);
-        if(request_details===undefined){
+    for (let i = 0; i < data.length; i++) {
+        let [request_details] = await getAllRequestDetailsByCode(data[i].code_product);
+        if (request_details === undefined) {
             dataUpdate.push({
                 name: data[i].name,
                 description: data[i].description,
@@ -43,9 +38,9 @@ export const getAllProductsThatNeverHasBeenRequestedWithItsNDI = async()=>{
     return dataUpdate;
 }
 
-//Obtener data de un producto mediante su codigo
-export const getProductByCode = async (code = '') => {
-    let res = await fetch(`http://localhost:5507/products?code_product=${code}`)
-    let data = await res.json()
-    return data
+//obtener los productos por codigo
+export const getAllProductsByCode = async (code_product) => {
+    let res = await fetch(`http://localhost:5506/products?code_product=${code_product}`)
+    let data = await res.json();
+    return data;
 }

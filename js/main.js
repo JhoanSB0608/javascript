@@ -1,55 +1,53 @@
-// import { 
-//     getAllOficceAndCodeCity, 
-//     getAllOficceCityAndMovil, 
-// } from "./module/offices.js";
-// 
-//import { 
-//     getEmployeesByCode, getAllEmployeesAndBossNames,
-//     getAllEmployeeBossAndHisBossNames
-// } from "./module/employees.js";
-// console.log(await getAllEmployeeBossAndHisBossNames());
-
-// import { 
-//     getAllClientNameAndSalesManager, getAllClientNameAndSalesManagerWithPayment, getAllClientNameAndSalesManagerWithoutPayment,
-//     getAllAlreadyClientsPaymentsAndManagerOffices, getAllNotAlreadyClientsPaymentsAndManagerOffices,
-//     getAllOfficeswithFuenlabradaClients, getAllClientsWithALateDeliveryArrive, getAll
-// } from "./module/clients.js";
-
-// console.log(await getAll());
-
-// import { 
-//     getAllPaymentsFromPayPalEachYear,
-// getPaymentByClientCode, getAllPaymentsMethods, getClientPayments_At_2008
-// } from "./module/payments.js";
-
-// console.log(await getClientPayments_At_2008())
-
-// import { 
-//     getListStatusRequests, ,
-//     getAllOrderCodeClientCodeAndOrdersThatHaveNotBeenDeliveredOnTime,
-//     getAllOrderCodeClientCodeAndDeliveryDateLeastTwoDaysBefore, getAllOrdersThatWereRejectedIn2009,
-//     getAllOrdersDeliveredInTheMonthOfJanuaryOfAnyYear
-// } from "./module/request.js";
-// console.log(await ());
-
-
-// import { 
-//     getAllOrnamentalsProducts
-// } from "./module/product.js";
-
-// console.log(await getAllOrnamentalsProducts())
-
-import { 
-    getAllEmployeesWithBossNameAndTheBossesNames
+import {
+    getAllOficceAndCodeCity,
+    getAllOficceCityAndMovil,
+    getAllOfficesAddressWithClientsInFuenlabrada
+} from "./module/offices.js";
+import {
+    getAllFullNameAndEmailsAndBoss,
+    getBossFullNameAndEmail,
+    getAllFullnamePositionDiferentSalesRepresentative,
+    getAllEmployeesAndBossesNames,
+    getAllEmployeesWithBossNameAndTheBossesNames,
+    getAllEmployeesThatDontHaveOffice,
+    getAllEmployeesThatArentAssociatedWithAnyClient,
+    getAllEmployeesThatArentAssociatedWithAnyClientAndDataOfHisOffice,
+    getAllEmployeesThatArentAssociatedWithAnyClientOrOffice,
+    getAllEmployeesThatArentAssociatedWithAnyClientAndHisBossName
 } from "./module/employees.js";
+import {
+    getAllSpanishClients,
+    getAllMadridClients,
+    getAllClientsAndSalesManagersName,
+    getAllClientsAndSalesManagersNameAndIfThereIsPayments,
+    getAllClientsAndSalesManagersNameAndIfThereIsntPayments,
+    getAllClientsAndSalesManagersNameAndIfThereIsPaymentsAndOfficeCity,
+    getAllClientsAndSalesManagersNameAndIfThereIsntPaymentsAndOfficeCity,
+    getAllClientsAndSalesManagersNameWithTheCItyOfTheOffice,
+    getAllClientsWhoHaventPaid,
+    getAllClientsWhoHaventRequest,
+    getAllClientsWhoHaveNeitherPaidNorRequest,
+    getAllClientsWhoHaveRequestedButHaventPaid,
+    getAllProductGamaThatAClientRequest,
+    getAllProductGamaThatAClientRequest1
+} from "./module/client.js";
+import {
+    getAllRequestStatus,
+    getAllRequestsOutOfTime,
+    getAllRequestsWithTwoDaysOfAnticipation,
+    getAllRequestsRejected2009,
+    getAllRequestsDeliveredJanuary,
+    getAllClientsWhoRecievedLateAProduct
+} from "./module/requests.js";
+import {
+    getAllClientCodesOfPaymentsIn2008,
+    getAllPaymentsFromPayPalEachYear,
+    getAllPaymentMethods
+} from "./module/payments.js";
+import {
+    getAllOrnamentalProductsWithMoreThan100Stock,
+    getAllProductsThatNeverHasBeenRequested,
+    getAllProductsThatNeverHasBeenRequestedWithItsNDI
+} from "./module/product.js";
 
 console.log(await getAllEmployeesWithBossNameAndTheBossesNames())
-
-
-
-// import { 
-//     getAllFullNamePositionDiferentSalesRepresentative, getAllEmployeesAndBossNames,
-//     getAllEmployNotClients
-// } from "./module/employees.js";
-
-// console.log(await getAllEmployNotClients());

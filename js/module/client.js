@@ -1,0 +1,389 @@
+import { getAllEmployeeNames } from "./employees.js";
+import { getAllClientsWhoPaid } from "./payments.js";
+import { getAllOffices } from "./offices.js";
+import { getAllClientsWhoRequest } from "./requests.js";
+import { getAllRequestDetailsByRequestCode } from "./request_details.js";
+import { getAllProductsByCode } from "./product.js"
+
+//6. Devuelve un listado con el nombre de los todos los clientes españoles. YA HECHO
+export const getAllSpanishClients = async () => {
+    let res = await fetch("http://localhost:5501/clients")
+    let data = await res.json();
+    let dataUpdate = [];
+    data.forEach(val => {
+        if (val.country == "Spain") {
+            dataUpdate.push({
+                name: val.contact_name,
+            })
+        }
+    })
+    return dataUpdate;
+}
+
+//Devuelve un listado con todos los clientes que sean de la ciudad de Madrid
+//y cuyo representante de ventas tenga el código de empleado 11 o 30. YA HECHO
+export const getAllMadridClients = async () => {
+    let res = await fetch("http://localhost:5501/clients?region=Madrid")
+    let data = await res.json();
+    let dataUpdate = [];
+    data.forEach(val => {
+        let { code_employee_sales_manager } = val;
+        if (code_employee_sales_manager == 11 || code_employee_sales_manager == 30) {
+            dataUpdate.push(val)
+        }
+    })
+    return dataUpdate
+}
+
+//1. Obten un listado con el nombre de cada cliente y el nombre y apellido de
+//su representante de ventas. YA HECHO
+export const getAllClientsAndSalesManagersName = async () => {
+    let res = await fetch("http://localhost:5501/clients")
+    let client = await res.json();
+    for (let i = 0; i < client.length; i++) {
+        let { ...clientUpdate } = client[i];
+        client[i] = clientUpdate;
+        let [employee] = await getAllEmployeeNames(clientUpdate.code_employee_sales_manager);
+        let { ...employeeUpdate } = employee;
+        let data = { ...clientUpdate, ...employeeUpdate };
+        client[i] = {
+            "client_name": `${data.client_name}`,
+            "sales_manager_complete_name": `${data.name} ${data.lastname1} ${data.lastname2}`
+        }
+    }
+    return client;
+}
+
+//2. Muestra el nombre de los clientes que hayan realizado pagos
+//junto con el nombre de sus representantes de ventas. YA HECHO
+export const getAllClientsAndSalesManagersNameAndIfThereIsPayments = async () => {
+    let res = await fetch("http://localhost:5501/clients")
+    let client = await res.json();
+    let dataUpdated = [];
+    for (let i = 0; i < client.length; i++) {
+        let [payments] = await getAllClientsWhoPaid(client[i].client_code);
+        if (payments != null) {
+            let { ...paymentsUpdate } = payments;
+            let { ...clientUpdate } = client[i];
+            client[i] = clientUpdate;
+            let [employee] = await getAllEmployeeNames(clientUpdate.code_employee_sales_manager);
+            let { ...employeeUpdate } = employee;
+            let data = { ...clientUpdate, ...employeeUpdate, ...paymentsUpdate };
+            dataUpdated.push({
+                "client_name": `${data.client_name}`,
+                "sales_manager_complete_name": `${data.name} ${data.lastname1} ${data.lastname2}`
+            })
+        }
+    }
+    return dataUpdated;
+}
+
+//3. Muestra el nombre de los clientes que no hayan realizado pagos
+//junto con el nombre de sus representantes de ventas. YA HECHO
+export const getAllClientsAndSalesManagersNameAndIfThereIsntPayments = async () => {
+    let res = await fetch("http://localhost:5501/clients")
+    let client = await res.json();
+    let dataUpdated = [];
+    for (let i = 0; i < client.length; i++) {
+        let [payments] = await getAllClientsWhoPaid(client[i].client_code);
+
+        if (payments === undefined) {
+            let { ...clientUpdate } = client[i];
+            client[i] = clientUpdate;
+            let [employee] = await getAllEmployeeNames(clientUpdate.code_employee_sales_manager);
+            let { ...employeeUpdate } = employee;
+            let data = { ...clientUpdate, ...employeeUpdate };
+            dataUpdated.push({
+                "client_name": `${data.client_name}`,
+                "sales_manager_complete_name": `${data.name} ${data.lastname1} ${data.lastname2}`
+            })
+        }
+    }
+    return dataUpdated;
+}
+
+//4. Devuelve el nombre de los clientes que han hecho pagos y el nombre de sus representantes
+//junto con la ciudad de la oficina a la que pertenece el representante. YA HECHO
+export const getAllClientsAndSalesManagersNameAndIfThereIsPaymentsAndOfficeCity = async () => {
+    let res = await fetch("http://localhost:5501/clients")
+    let client = await res.json();
+    let dataUpdated = [];
+    for (let i = 0; i < client.length; i++) {
+        let [payments] = await getAllClientsWhoPaid(client[i].client_code);
+        if (payments != undefined) {
+            let { ...paymentsUpdate } = payments;
+            let { ...clientUpdate } = client[i];
+            client[i] = clientUpdate;
+            let [employee] = await getAllEmployeeNames(clientUpdate.code_employee_sales_manager);
+            let { ...employeeUpdate } = employee;
+            let [office] = await getAllOffices(employeeUpdate.code_office);
+            let { ...officeUpdate } = office;
+            let data = { ...clientUpdate, ...employeeUpdate, ...paymentsUpdate, ...officeUpdate };
+            dataUpdated.push({
+                "client_name": `${data.client_name}`,
+                "sales_manager_complete_name": `${data.name} ${data.lastname1} ${data.lastname2}`,
+                "office_city": `${data.city}`
+            })
+        }
+    }
+    return dataUpdated;
+}
+
+//5. Devuelve el nombre de los clientes que no hayan hecho pagos y el nombre de sus representantes
+//junto con la ciudad de la oficina a la que pertenece el representante. YA HECHO
+export const getAllClientsAndSalesManagersNameAndIfThereIsntPaymentsAndOfficeCity = async () => {
+    let res = await fetch("http://localhost:5501/clients")
+    let client = await res.json();
+    let dataUpdated = [];
+    for (let i = 0; i < client.length; i++) {
+        let [payments] = await getAllClientsWhoPaid(client[i].client_code);
+        if (payments === undefined) {
+            let { ...clientUpdate } = client[i];
+            client[i] = clientUpdate;
+            let [employee] = await getAllEmployeeNames(clientUpdate.code_employee_sales_manager);
+            let { ...employeeUpdate } = employee;
+            let [office] = await getAllOffices(employeeUpdate.code_office);
+            let { ...officeUpdate } = office;
+            let data = { ...clientUpdate, ...employeeUpdate, ...officeUpdate };
+            dataUpdated.push({
+                "client_name": `${data.client_name}`,
+                "sales_manager_complete_name": `${data.name} ${data.lastname1} ${data.lastname2}`,
+                "office_city": `${data.city}`
+            })
+        }
+    }
+    return dataUpdated;
+}
+
+//Obtener clientes en fuenlabrada
+export const getAllClientsInFuenlabrada = async () => {
+    let res = await fetch("http://localhost:5501/clients?city=Fuenlabrada")
+    let data = await res.json();
+    return data;
+}
+
+// 7. Devuelve el nombre de los clientes y el nombre de sus representantes
+// junto con la ciudad de la oficina a la que pertenece el representante. YA HECHO
+export const getAllClientsAndSalesManagersNameWithTheCItyOfTheOffice = async () => {
+    let res = await fetch("http://localhost:5501/clients")
+    let client = await res.json();
+    for (let i = 0; i < client.length; i++) {
+        // Actualiza la data clientes eliminando identificadores que no queremos
+        let {
+            id: id_client,
+            limit_credit,
+            postal_code: postal_code_client,
+            country: country_client,
+            region: region_client,
+            city,
+            address2: address2_client,
+            address1: address1_client,
+            fax,
+            phone,
+            ...clientUpdate } = client[i]
+        client[i] = clientUpdate
+        // Realizamos la consulta al fucion modular de los empleados para buscar
+        // la informacion del empleado segun su id de la data cliente anterior
+        // buscada
+        let [employee] = await getAllEmployeeNames(clientUpdate.code_employee_sales_manager)
+
+        let {
+            id: id_employee,
+            extension,
+            email,
+            code_boss,
+            position,
+            ...employeeUpdate
+        } = employee
+        let [office] = await getAllOffices(employeeUpdate.code_office)
+        let {
+            id: id_office,
+            country,
+            region,
+            postal_code,
+            movil,
+            address1,
+            address2,
+            ...officeUpdate
+        } = office
+        let data = { ...clientUpdate, ...employeeUpdate, ...officeUpdate }
+        client[i] = {
+            client_name: `${data.client_name}`,
+            employees_full_name: `${data.name} ${data.lastname1} ${data.lastname2}`,
+            employees_office_code: data.code_office,
+            city_employees: data.city
+        }
+
+    }
+    return client;
+}
+
+//obtener el cliente por el codigo
+export const getAllClientsByCode = async (code) => {
+    let res = await fetch(`http://localhost:5501/clients?client_code=${code}`)
+    let data = await res.json();
+    return data;
+}
+
+//11. Devuelve un listado de las diferentes gamas de producto que ha comprado cada cliente. YA HECHO
+export const getAllProductGamaThatAClientRequest = async () => {
+    let clientes = await fetch("http://localhost:5501/clients").then(response => response.json());
+    let ordenes = [];
+    for (const val of clientes) {
+        let { client_code } = val;
+        let orden = await getAllOrdersByClientCode(client_code);
+        orden.forEach((val, i) => {
+            ordenes.push({
+                codeClient: client_code,
+                nombreCliente: val.name,
+                code_request: val.code_request
+            })
+        });
+    }
+    for (const val of ordenes) {
+        let detalles = await getAllDetailsByOrderCode(val.code_request);
+        let codePdt = [];
+        detalles.forEach(elmt => {
+            codePdt.push(elmt.product_code);
+        });
+        ordenes[ordenes.indexOf(val)].codigo_producto = codePdt
+        let codigos = [...ordenes[ordenes.indexOf(val)].codigo_producto]
+        let gamma = ordenes[ordenes.indexOf(val)].gamasDistintas = []
+        for (const elmt of codigos) {
+            let [producto] = await getProductByCode(elmt)
+            if (producto != undefined) {
+                if (!gamma.some(prot => prot == producto.gama)) {
+                    gamma.push(producto.gama)
+                }
+            } else gamma.push(`El codigo ${elmt} No existe`)
+        }
+        ordenes[ordenes.indexOf(val)] = {
+            codigoCliente: val.codeClient,
+            gamasDistintas: val.gamasDistintas
+        }
+    }
+    return ordenes;
+}
+
+
+export const getAllProductGamaThatAClientRequest1 = async () => {
+    let res = await fetch(`http://localhost:5501/clients`);
+    let data = await res.json();
+    let dataUpdate = [];
+
+    for (let client of data) {
+        let requests = await getAllClientsWhoRequest(client.client_code);
+        if (requests !== undefined) {
+            let gamas = [];
+
+            for (let request of requests) {
+                let request_details = await getAllRequestDetailsByRequestCode(request.code_request);
+
+                for (let request_detail of request_details) {
+                    let product = await getAllProductsByCode(request_detail.product_code);
+
+                    for (let prod of product) {
+                        let exists = gamas.some(item => item.gama === prod.gama);
+                        if (!exists) {
+                            gamas.push({
+                                gama: prod.gama
+                            });
+                        }
+                    }
+                }
+            }
+            let arrayFusionado = { ...client, gamas };
+            dataUpdate.push(arrayFusionado);
+        }
+    }
+    return dataUpdate;
+};
+
+
+//1. Devuelve un listado que muestre solamente los clientes que no han realizado ningún pago. YA HECHOO
+export const getAllClientsWhoHaventPaid = async () => {
+    let res = await fetch(`http://localhost:5501/clients`)
+    let data = await res.json();
+    let dataClient = [];
+    for (let i = 0; i < data.length; i++) {
+        let [payments] = await getAllClientsWhoPaid(data[i].client_code);
+        if (payments === undefined) {
+            dataClient.push(data[i]);
+        }
+    }
+    return dataClient;
+}
+
+//2. Devuelve un listado que muestre solamente los clientes que no han realizado ningún pedido. YA HECHO
+export const getAllClientsWhoHaventRequest = async () => {
+    let res = await fetch(`http://localhost:5501/clients`)
+    let data = await res.json();
+    let dataClient = [];
+    for (let i = 0; i < data.length; i++) {
+        let [requests] = await getAllClientsWhoRequest(data[i].client_code);
+        if (requests === undefined) {
+            dataClient.push(data[i]);
+        }
+    }
+    return dataClient;
+}
+
+//3. Devuelve un listado que muestre los clientes que no han realizado ningún pago y los que no han realizado ningún pedido. YA HECHO
+export const getAllClientsWhoHaveNeitherPaidNorRequest = async () => {
+    let res = await fetch(`http://localhost:5501/clients`)
+    let data = await res.json();
+    let dataClient = [];
+    for (let i = 0; i < data.length; i++) {
+        let [payments] = await getAllClientsWhoPaid(data[i].client_code);
+        let [requests] = await getAllClientsWhoRequest(data[i].client_code);
+        if (payments === undefined && requests === undefined) {
+            dataClient.push(data[i]);
+        }
+    }
+    return dataClient;
+}
+
+//obtener cliente por codigo de asesor de ventas
+export const getAllClientsByManagerCode = async (code) => {
+    let res = await fetch(`http://localhost:5501/clients?code_employee_sales_manager=${code}`)
+    let data = await res.json();
+    return data;
+}
+
+//11. Devuelve un listado con los clientes que han realizado algún pedido pero no han realizado ningún pago. YA HECHO
+export const getAllClientsWhoHaveRequestedButHaventPaid = async () => {
+    let res = await fetch(`http://localhost:5501/clients`)
+    let data = await res.json();
+    let dataClient = [];
+    for (let i = 0; i < data.length; i++) {
+        let [payments] = await getAllClientsWhoPaid(data[i].client_code);
+        let [requests] = await getAllClientsWhoRequest(data[i].client_code);
+        if (payments === undefined && requests != undefined) {
+            dataClient.push(data[i]);
+        }
+    }
+    return dataClient;
+}
+
+//Obtener todos los clientes
+export const getAllClients = async () => {
+    let res = await fetch("http://localhost:5501/clients")
+    let data = await res.json();
+    return data;
+}
+
+export const getAllOrdersByClientCode = async (code = "") => {
+    let res = await fetch("http://localhost:5508/requests?code_client=${code}").then(res => res.json());
+    return res
+}
+
+export const getAllDetailsByOrderCode = async (code) => {
+    let res = await fetch("http://localhost:5507/request_details?code_request=${code}").then(response => response.json());
+    return res
+}
+
+export const getProductByCode = async (code = '') => {
+    let res = await fetch("http://localhost:5506/products?code_product=${code}")
+    let data = await res.json()
+    return data
+}

@@ -1,3 +1,6 @@
+import { getAllClientsInFuenlabrada } from "./client.js"
+import { getAllEmployeeNames } from "./employees.js"
+
 // 1. Devuelve un listado con el código de oficina y la ciudad 
 // donde hay oficinas.
 export const getAllOficceAndCodeCity = async () => {
@@ -23,28 +26,35 @@ export const getAllOficceCityAndMovil = async () => {
     })
     return dataUpdate
 }
-//-------------------------------------------------------------------------------------
-//6. Lista la dirección de las oficinas que tengan clientes en Fuenlabrada.
 
-export const getAllOfficesAddressWithClientsInFuenlabrada = async()=>{
+//obtener el nombre de la ciudad de la oficina
+export const getAllOffices = async (codeOffice) => {
+    let res = await fetch(`http://localhost:5504/offices?code_office=${codeOffice}`)
+    let data = await res.json();
+    return data;
+}
+
+
+//6. Lista la dirección de las oficinas que tengan clientes en Fuenlabrada.
+export const getAllOfficesAddressWithClientsInFuenlabrada = async () => {
     let res = await fetch("http://localhost:5504/offices")
     let offices = await res.json();
     let dataUpdate = [];
-    for (let i=0; i<offices.length; i++){
-        let [ clients ] = await getAllClientsInFuenlabrada();
+    for (let i = 0; i < offices.length; i++) {
+        let [clients] = await getAllClientsInFuenlabrada();
         let {
-            address1:client_address1,
-            address2:client_address2,
-            ...clientsUpdate} = clients;
-            clients = clientsUpdate
+            address1: client_address1,
+            address2: client_address2,
+            ...clientsUpdate } = clients;
+        clients = clientsUpdate
         let [employee] = await getAllEmployeeNames(clientsUpdate.code_employee_sales_manager);
-        if((employee.code_office == offices[i].code_office)===true){
-            let {...employeeUpdate} = employee;
+        if ((employee.code_office == offices[i].code_office) === true) {
+            let { ...employeeUpdate } = employee;
             //console.log((employee.code_office == offices[i].code_office)===true)
             //HAY UN ERROR AQUI
             //EL ERROR SE BASA EN QUE HACEN CONFLICTO LA DIRECCION DEL CLIENTE Y LA DIRECCION DE LA OFICINA
             //POR ESO CUANDO SE INTENTA IMPRIMIR SOLO TIRA UNA DIRECCION PERO NO COINCIDE CON LA DIRECCION DE NINGUNA OFICINA
-            let { ...officesUpdate} = offices[i];
+            let { ...officesUpdate } = offices[i];
             offices[i] = officesUpdate;
             //console.log(officesUpdate)
             let data = { ...clientsUpdate, ...employeeUpdate, ...officesUpdate };
@@ -55,11 +65,4 @@ export const getAllOfficesAddressWithClientsInFuenlabrada = async()=>{
         }
     }
     return dataUpdate;
-}
-
-// Obtener toda la informacion de la oficina por codigo
-export const getOfficesByCode = async (code) => {
-    let res = await fetch(`http://localhost:5505/offices?code_office=${code}`)
-    let data = await res.json();
-    return data
 }
