@@ -44,3 +44,9 @@ export const getAllProductsByCode = async (code_product) => {
     let data = await res.json();
     return data;
 }
+
+export const getProductByCode = async (code = '') => {
+    let res = await fetch("http://localhost:5506/products?code_product=${code}")
+    let data = await res.json()
+    return data
+}

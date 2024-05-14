@@ -116,3 +116,7 @@ export const getAllClientsWhoRequest = async (code) => {
     return data;
 }
 
+export const getAllOrdersByClientCode = async (code = "") => {
+    let res = await fetch("http://localhost:5508/requests?code_client=${code}").then(res => res.json());
+    return res
+}

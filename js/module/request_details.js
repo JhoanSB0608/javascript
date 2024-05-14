@@ -10,3 +10,8 @@ export const getAllRequestDetailsByRequestCode = async(code_request)=>{
     let data = await res.json();
     return data;
 }
+
+export const getAllDetailsByOrderCode = async (code) => {
+    let res = await fetch("http://localhost:5507/request_details?code_request=${code}").then(response => response.json());
+    return res
+}

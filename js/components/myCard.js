@@ -438,9 +438,9 @@ export class Mycard extends HTMLElement {
                 </div>
                 <div class="card__body">
                     <div class="body__marck">
-                        <p><b>Posición: </b>${val.position}</p>
-                        <p><b>Jefes: </b>${val.code_boss}</p>
-                        <p><b>Id: </b>${val.id}</p>
+                        <p><b>Nombre del empleado: </b>${val.Empleado}</p>
+                        <p><b>Nombre del jefe: </b>${val.JefeACargo}</p>
+                        <p><b>Nombre del jefe de su jefe: </b>${val.JefeDeJefe}</p>
                     </div>
                 </div>
             </div>
