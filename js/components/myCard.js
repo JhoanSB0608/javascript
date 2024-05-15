@@ -520,29 +520,6 @@ export class Mycard extends HTMLElement {
             `;
         });
     }
-
-    async getAllEmployeesThatArentAssociatedWithAnyClientAndDataOfHisOfficeDesign() {
-        let data = await getAllEmployeesThatArentAssociatedWithAnyClientAndDataOfHisOffice();
-        data.forEach(val => {
-            this.shadowRoot.innerHTML += /*HTML*/`
-            <div class="report__card">
-                <div class="card__title">
-                    <div>${val.name} ${val.lastname1} ${val.lastname2} # ${val.employee_code}</div>
-                </div>
-                <div class="card__body">
-                    <div class="body__marck">
-                        <p><b>Id: </b>${val.id}</p>
-                        <p><b>Cargo: </b>${val.position}</p>
-                        <p><b>Numero de extencion: </b>${val.extension}</p>
-                        <p><b>Correo electronico: </b>${val.email}</p>
-                        <p><b>Codigo de jefe: </b>${val.code_boss}</p>
-                    </div>
-                </div>
-            </div>
-            `;
-        });
-    }
-
     async getAllEmployeesThatArentAssociatedWithAnyClientAndHisBossNameDesign() {
         let data = await getAllEmployeesThatArentAssociatedWithAnyClientAndHisBossName();
         data.forEach(val => {

@@ -109,39 +109,67 @@ export const getAllEmployeesThatDontHaveOffice = async () => {
 
 //5. Devuelve un listado que muestre solamente los empleados que no tienen un cliente asociado.
 export const getAllEmployeesThatArentAssociatedWithAnyClient = async () => {
-    let res = await fetch("http://localhost:5502/employee")
-    let data = await res.json();
-    let dataUpdate = [];
-    for (let i = 0; i < data.length; i++) {
-        let [client] = await getAllClientsByManagerCode(data[i].employee_code);
-        if (client === undefined) {
-            dataUpdate.push(data[i]);
-        }
-    }
-    return dataUpdate;
-}
+    // Obtener los datos de los empleados
+    let resEmployees = await fetch("http://localhost:5502/employee");
+    let employees = await resEmployees.json();
 
-//6. Devuelve un listado que muestre solamente los empleados que no tienen un cliente asociado junto con los datos de la oficina donde trabajan.
-export const getAllEmployeesThatArentAssociatedWithAnyClientAndDataOfHisOffice = async () => {
-    let res = await fetch("http://localhost:5502/employee")
-    let data = await res.json();
+    // Obtener los datos de los clientes
+    let resClients = await fetch("http://localhost:5501/clients"); 
+    let clients = await resClients.json();
+
     let dataUpdate = [];
-    for (let i = 0; i < data.length; i++) {
-        let {
-            id: id_employee,
-            ...employeeUpdate } = data[i];
-        data[i] = employeeUpdate;
-        let [client] = await getAllClientsByManagerCode(data[i].employee_code);
-        if (client === undefined) {
-            let [office] = await getAllOffices(data[i].code_office);
-            let {
-                id: id_office,
-                ...officeUpdate } = office;
-            dataUpdate.push({ ...employeeUpdate, ...officeUpdate });
+    for (let i = 0; i < employees.length; i++) {
+        let employeeAssociated = false;
+        for (let j = 0; j < clients.length; j++) {
+            if (employees[i].employee_code === clients[j].code_employee_sales_manager) {
+                employeeAssociated = true;
+                break;
+            }
+        }
+        if (!employeeAssociated) {
+            dataUpdate.push(employees[i]);
         }
     }
     return dataUpdate;
-}
+};
+
+
+// 6. Devuelve un listado que muestre solamente los empleados que no tienen un cliente asociado
+// junto con los datos de la oficina donde trabajan.
+export const getAllEmployeesThatArentAssociatedWithAnyClientAndDataOfHisOffice = async () => {
+    let resEmployees = await fetch("http://localhost:5502/employee");
+    let employees = await resEmployees.json();
+    let resClients = await fetch("http://localhost:5501/clients"); 
+    let clients = await resClients.json();
+    let resOffices = await fetch("http://localhost:5504/offices"); 
+    let offices = await resOffices.json();
+
+    let dataUpdate = [];
+    for (let i = 0; i < employees.length; i++) {
+        let employeeAssociated = false;
+        for (let j = 0; j < clients.length; j++) {
+            if (employees[i].employee_code === clients[j].code_employee_sales_manager) {
+                employeeAssociated = true;
+                break;
+            }
+        }
+        if (!employeeAssociated) {
+            let employee = employees[i];
+            let employeeUpdate = { ...employee };
+            // Buscar la oficina del empleado
+            let office = offices.find(office => office.code_office === employee.code_office);
+            if (office) {
+                // Agregar los datos de la oficina al empleado
+                let officeUpdate = { id_office: office.id, ...office };
+                dataUpdate.push({ ...employeeUpdate, ...officeUpdate });
+            } else {
+                console.log(`No se encontró la oficina para el empleado con código de oficina: ${employee.code_office}`);
+            }
+        }
+    }
+    return dataUpdate;
+};
+
 
 //7. Devuelve un listado que muestre los empleados que no tienen una oficina asociada y los que no tienen un cliente asociado.
 export const getAllEmployeesThatArentAssociatedWithAnyClientOrOffice = async () => {
