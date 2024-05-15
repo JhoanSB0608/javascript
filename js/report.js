@@ -10,7 +10,6 @@ btn.forEach(val => {
     val.addEventListener("click", (e) => {
         for (let val of report__menu) val.classList.remove('report__active');
         e.target.classList.add("report__active")
-
         if (e.target.innerHTML == "clients") {
             report__details.innerHTML = /*html*/`
                 <my-details logic="client_1" text="1. Devuelve un listado con el nombre de los todos los clientes españoles."></my-details>

@@ -13,7 +13,7 @@ export const getAllSpanishClients = async () => {
     data.forEach(val => {
         if (val.country == "Spain") {
             dataUpdate.push({
-                name: val.contact_name,
+                name: val.client_name,
             })
         }
     })

@@ -77,7 +77,7 @@ export class Mycard extends HTMLElement {
             this.shadowRoot.innerHTML += /*html*/`
                 <div class="report__card">
                     <div class="card__title">
-                        <div>${val.client_name}</div>
+                        <div>Clientes y sus representantes junto con la ciudad de la oficina del representante</div>
                     </div>
                     <div class="card__body">
                         <div class="body__marck">
@@ -99,7 +99,7 @@ export class Mycard extends HTMLElement {
             this.shadowRoot.innerHTML += /*html*/`
                 <div class="report__card">
                     <div class="card__title">
-                        <div>${val.client_name} # ${val.client_code}</div>
+                        <div>Clientes de Madrid y con representante de ventas con código de empleado 11 o 30</div>
                     </div>
                     <div class="card__body">
                         <div class="body__marck">
@@ -123,7 +123,7 @@ export class Mycard extends HTMLElement {
             this.shadowRoot.innerHTML += /*html*/`
                 <div class="report__card">
                     <div class="card__title">
-                        <div>${val.client_name}</div>
+                        <div>Nombre completo del cliente y su representante de ventas</div>
                     </div>
                     <div class="card__body">
                         <div class="body__marck">
@@ -142,7 +142,7 @@ export class Mycard extends HTMLElement {
             this.shadowRoot.innerHTML += /*html*/`
                 <div class="report__card">
                     <div class="card__title">
-                        <div>${val.client_name}</div>
+                        <div>Clientes que han realizado pagos y sus representantes de ventas</div>
                     </div>
                     <div class="card__body">
                         <div class="body__marck">
@@ -161,7 +161,7 @@ export class Mycard extends HTMLElement {
             this.shadowRoot.innerHTML += /*html*/`
                 <div class="report__card">
                     <div class="card__title">
-                        <div>${val.client_name}</div>
+                        <div>Clientes que NO han realizado pagos y sus representantes de ventas</div>
                     </div>
                     <div class="card__body">
                         <div class="body__marck">
@@ -180,7 +180,7 @@ export class Mycard extends HTMLElement {
             this.shadowRoot.innerHTML += /*html*/`
                 <div class="report__card">
                     <div class="card__title">
-                        <div>${val.client_name}</div>
+                        <div>Clientes que han realizado pagos y sus representantes de ventas y Ciudad del representante</div>
                     </div>
                     <div class="card__body">
                         <div class="body__marck">
@@ -200,7 +200,7 @@ export class Mycard extends HTMLElement {
             this.shadowRoot.innerHTML += /*html*/`
                 <div class="report__card">
                     <div class="card__title">
-                        <div>${val.client_name}</div>
+                        <div>Clientes que NO han realizado pagos y sus representantes de ventas y Ciudad del representante</div>
                     </div>
                     <div class="card__body">
                         <div class="body__marck">
@@ -220,7 +220,7 @@ export class Mycard extends HTMLElement {
             this.shadowRoot.innerHTML += /*html*/`
                 <div class="report__card">
                     <div class="card__title">
-                        <div>${val.client_name} # ${val.client_code}</div>
+                        <div>Clientes en Fuenlabrada</div>
                     </div>
                     <div class="card__body">
                         <div class="body__marck">
@@ -237,7 +237,6 @@ export class Mycard extends HTMLElement {
         });
     }
 
-    /*ESTA CONSULTA FALTA POR TERMINAR*/
     async getAllProductGamaThatAClientRequestDesign() {
         let data = await getAllProductGamaThatAClientRequest();
         data.forEach(val => {
@@ -264,7 +263,7 @@ export class Mycard extends HTMLElement {
             this.shadowRoot.innerHTML += /*html*/`
                 <div class="report__card">
                     <div class="card__title">
-                        <div>${val.client_name} # ${val.client_code}</div>
+                        <div>Clientes que no han realizado ningún pago</div>
                     </div>
                     <div class="card__body">
                         <div class="body__marck">
@@ -287,7 +286,7 @@ export class Mycard extends HTMLElement {
             this.shadowRoot.innerHTML += /*html*/`
                 <div class="report__card">
                     <div class="card__title">
-                        <div>${val.client_name} # ${val.client_code}</div>
+                        <div>Clientes que no han realizado ningún pedido</div>
                     </div>
                     <div class="card__body">
                         <div class="body__marck">
@@ -310,7 +309,7 @@ export class Mycard extends HTMLElement {
             this.shadowRoot.innerHTML += /*html*/`
                 <div class="report__card">
                     <div class="card__title">
-                        <div>${val.client_name} # ${val.client_code}</div>
+                        <div>Clientes que no han realizado ningún pago y los que no han realizado ningún pedido</div>
                     </div>
                     <div class="card__body">
                         <div class="body__marck">
@@ -333,7 +332,7 @@ export class Mycard extends HTMLElement {
             this.shadowRoot.innerHTML += /*html*/`
                 <div class="report__card">
                     <div class="card__title">
-                        <div>${val.client_name} # ${val.client_code}</div>
+                        <div>Clientes que han realizado algún pedido pero no han realizado ningún pago</div>
                     </div>
                     <div class="card__body">
                         <div class="body__marck">
@@ -356,7 +355,7 @@ export class Mycard extends HTMLElement {
             this.shadowRoot.innerHTML += /*HTML*/`
             <div class="report__card">
                 <div class="card__title">
-                    <div>${val.name} ${val.fullLastname}</div>
+                    <div>Nombre completo y email de los empleados cuyo jefe tiene un código igual a 7</div>
                 </div>
                 <div class="card__body">
                     <div class="body__marck">
@@ -376,7 +375,7 @@ export class Mycard extends HTMLElement {
             this.shadowRoot.innerHTML += /*HTML*/`
             <div class="report__card">
                 <div class="card__title">
-                    <div>${val.position}</div>
+                    <div>Puesto, Nombre completo y email del jefe de la empresa</div>
                 </div>
                 <div class="card__body">
                     <div class="body__marck">
@@ -396,7 +395,7 @@ export class Mycard extends HTMLElement {
             this.shadowRoot.innerHTML += /*HTML*/`
             <div class="report__card">
                 <div class="card__title">
-                    <div>${val.name} ${val.fullLastname}</div>
+                    <div>Nombre completo y email de empleados que no sean representantes de ventas</div>
                 </div>
                 <div class="card__body">
                     <div class="body__marck">
@@ -408,14 +407,13 @@ export class Mycard extends HTMLElement {
             `;
         });
     }
-    /*ESTA CONSULTA FALTA*/
     async getAllEmployeesAndBossesNamesDesign() {
         let data = await getAllEmployeesAndBossesNames();
         data.forEach(val => {
             this.shadowRoot.innerHTML += /*HTML*/`
             <div class="report__card">
                 <div class="card__title">
-                    <div>${val.name} ${val.fullLastname}</div>
+                    <div>Nombre de los empleados junto con el nombre de sus jefes</div>
                 </div>
                 <div class="card__body">
                     <div class="body__marck">
@@ -434,7 +432,7 @@ export class Mycard extends HTMLElement {
             this.shadowRoot.innerHTML += /*HTML*/`
             <div class="report__card">
                 <div class="card__title">
-                    <div>${val.name} ${val.lastname1} ${(val.lastname2) ? val.lastname2 : ""} # ${val.employee_code}</div>
+                    <div>Nombre de cada empleados, el Nombre de su jefe y el Nombre del jefe de su jefe</div>
                 </div>
                 <div class="card__body">
                     <div class="body__marck">
@@ -454,7 +452,7 @@ export class Mycard extends HTMLElement {
             this.shadowRoot.innerHTML += /*HTML*/`
             <div class="report__card">
                 <div class="card__title">
-                    <div>${val.name} ${val.lastname1} ${(val.lastname2) ? val.lastname2 : ""} # ${val.employee_code}</div>
+                    <div>Empleados que no tienen una oficina asociada</div>
                 </div>
                 <div class="card__body">
                     <div class="body__marck">
@@ -476,7 +474,7 @@ export class Mycard extends HTMLElement {
             this.shadowRoot.innerHTML += /*HTML*/`
             <div class="report__card">
                 <div class="card__title">
-                    <div>${val.name} ${val.lastname1} ${val.lastname2} # ${val.employee_code}</div>
+                    <div>Empleados que no tienen un cliente asociado</div>
                 </div>
                 <div class="card__body">
                     <div class="body__marck">
@@ -499,7 +497,7 @@ export class Mycard extends HTMLElement {
             this.shadowRoot.innerHTML += /*HTML*/`
             <div class="report__card">
                 <div class="card__title">
-                    <div>${val.name} ${val.lastname1} ${val.lastname2} # ${val.employee_code}</div>
+                    <div>Empleados que no tienen un cliente asociado junto con los datos de la oficina donde trabajan.</div>
                 </div>
                 <div class="card__body">
                     <div class="body__marck">
@@ -526,7 +524,7 @@ export class Mycard extends HTMLElement {
             this.shadowRoot.innerHTML += /*HTML*/`
             <div class="report__card">
                 <div class="card__title">
-                    <div>${val.name} ${val.lastname1} ${val.lastname2} # ${val.employee_code}</div>
+                    <div>Empleados que no tienen clientes asociados y el nombre de su jefe asociado</div>
                 </div>
                 <div class="card__body">
                     <div class="body__marck">
@@ -549,7 +547,7 @@ export class Mycard extends HTMLElement {
             this.shadowRoot.innerHTML += /*HTML*/`
             <div class="report__card">
                 <div class="card__title">
-                    <div>${val.code_office}</div>
+                    <div>Código de oficina y la ciudad donde hay oficinas</div>
                 </div>
                 <div class="card__body">
                     <div class="body__marck">
@@ -566,7 +564,7 @@ export class Mycard extends HTMLElement {
             this.shadowRoot.innerHTML += /*HTML*/`
             <div class="report__card">
                 <div class="card__title">
-                    <div>${val.code_office}</div>
+                    <div>Ciudad y el teléfono de las oficinas de España<div>
                 </div>
                 <div class="card__body">
                     <div class="body__marck">
@@ -583,7 +581,7 @@ export class Mycard extends HTMLElement {
             this.shadowRoot.innerHTML += /*HTML*/`
             <div class="report__card">
                 <div class="card__title">
-                    <div>${val.code_office}</div>
+                    <div>Dirección de las oficinas que tengan clientes en Fuenlabrada</div>
                 </div>
                 <div class="card__body">
                     <div class="body__marck">
@@ -613,7 +611,7 @@ export class Mycard extends HTMLElement {
             this.shadowRoot.innerHTML += /*HTML*/`
             <div class="report__card">
                 <div class="card__title">
-                    <div>${val.id_transaction}</div>
+                    <div>Pagos que se realizaron en el año 2008 mediante Paypal</div>
                 </div>
                 <div class="card__body">
                     <div class="body__marck">
@@ -669,7 +667,7 @@ export class Mycard extends HTMLElement {
             this.shadowRoot.innerHTML += /*HTML*/`
             <div class="report__card">
                 <div class="card__title">
-                    <div>${val.name} # ${val.code_product}</div>
+                    <div>Productos que nunca han aparecido en un pedido/div>
                 </div>
                 <div class="card__body">
                     <div class="body__marck">
@@ -724,7 +722,7 @@ export class Mycard extends HTMLElement {
             this.shadowRoot.innerHTML += /*HTML*/`
             <div class="report__card">
                 <div class="card__title">
-                    <div>${val.code_request}</div>
+                    <div>código de pedido y cliente, fecha esperada y entrega de los pedidos que no han sido entregados a tiempo</div>
                 </div>
                 <div class="card__body">
                     <div class="body__marck">
@@ -764,7 +762,7 @@ export class Mycard extends HTMLElement {
             this.shadowRoot.innerHTML += /*HTML*/`
             <div class="report__card">
                 <div class="card__title">
-                    <div>${val.code_request}</div>
+                    <div>Pedidos que fueron rechazados en 2009</div>
                 </div>
                 <div class="card__body">
                     <div class="body__marck">
@@ -787,7 +785,7 @@ export class Mycard extends HTMLElement {
             this.shadowRoot.innerHTML += /*HTML*/`
             <div class="report__card">
                 <div class="card__title">
-                    <div>${val.code_request}</div>
+                    <div>Pedidos que han sido entregados en el mes de enero de cualquier año/div>
                 </div>
                 <div class="card__body">
                     <div class="body__marck">
