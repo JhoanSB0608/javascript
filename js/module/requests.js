@@ -7,7 +7,7 @@ export const getAllRequestStatus = async () => {
     data.forEach(val => {
         let exists = dataUpdate.some(item => item.status == val.status)
         if (!exists) dataUpdate.push({ status: val.status })
-        })
+    })
     return dataUpdate;
 }
 
@@ -90,25 +90,34 @@ export const getAllRequestsDeliveredJanuary = async () => {
 }
 
 //10. Devuelve el nombre de los clientes a los que no se les ha entregado a tiempo un pedido.
+// 10. Devuelve el nombre de los clientes a los que no se les ha entregado a tiempo un pedido.
 export const getAllClientsWhoRecievedLateAProduct = async () => {
-    let res = await fetch("http://localhost:5508/requests?status=Entregado")
+    let res = await fetch("http://localhost:5508/requests?status=Entregado");
     let dataRequest = await res.json();
     let dataClients = [];
+
+    // Obtener todos los clientes
+    let clientsRes = await fetch("http://localhost:5501/clients");
+    let clientsData = await clientsRes.json();
+    let clientsMap = new Map(clientsData.map(client => [client.client_code, client.client_name]));
+
     for (let i = 0; i < dataRequest.length; i++) {
         let fecha1 = new Date(dataRequest[i].date_wait);
         let fecha2 = new Date(dataRequest[i].date_delivery);
         if (fecha2 > fecha1) {
-            let [clients] = await getAllClientsByCode(dataRequest[i].code_client);
-            let exists = dataClients.some(item => item.client_name === clients.client_name);
-            if (!exists) {
-                dataClients.push({
-                    "client_name": `${clients.client_name}`,
-                })
+            let clientName = clientsMap.get(dataRequest[i].code_client);
+            if (clientName) {
+                let exists = dataClients.some(item => item.client_name === clientName);
+                if (!exists) {
+                    dataClients.push({
+                        "client_name": clientName,
+                    });
+                }
             }
         }
     }
     return dataClients;
-}
+};
 
 export const getAllClientsWhoRequest = async (code) => {
     let res = await fetch(`http://localhost:5508/requests?code_client=${code}`)
