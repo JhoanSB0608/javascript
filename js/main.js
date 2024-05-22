@@ -50,4 +50,4 @@ import {
     getAllProductsThatNeverHasBeenRequestedWithItsNDI
 } from "./module/product.js";
 
-console.log(await getAllClientsWhoHaventPaid())
+console.log(await getAllEmployeesThatArentAssociatedWithAnyClientAndDataOfHisOffice())

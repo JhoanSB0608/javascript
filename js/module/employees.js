@@ -114,7 +114,7 @@ export const getAllEmployeesThatArentAssociatedWithAnyClient = async () => {
     let employees = await resEmployees.json();
 
     // Obtener los datos de los clientes
-    let resClients = await fetch("http://172.16.101.146:5531/clients"); 
+    let resClients = await fetch(getAllClients); 
     let clients = await resClients.json();
 
     let dataUpdate = [];
@@ -139,9 +139,9 @@ export const getAllEmployeesThatArentAssociatedWithAnyClient = async () => {
 export const getAllEmployeesThatArentAssociatedWithAnyClientAndDataOfHisOffice = async () => {
     let resEmployees = await fetch("http://172.16.101.146:5532/employee");
     let employees = await resEmployees.json();
-    let resClients = await fetch("http://172.16.101.146:5531/clients"); 
+    let resClients = await fetch(getAllClients); 
     let clients = await resClients.json();
-    let resOffices = await fetch("http://172.16.101.146:5534/offices"); 
+    let resOffices = await fetch(getAllOffices); 
     let offices = await resOffices.json();
 
     let dataUpdate = [];

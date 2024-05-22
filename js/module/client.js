@@ -377,19 +377,3 @@ export const getAllClients = async () => {
     let data = await res.json();
     return data;
 }
-
-export const getAllOrdersByClientCode = async (code = "") => {
-    let res = await fetch("http://172.16.101.146:5538/requests?code_client=${code}").then(res => res.json());
-    return res
-}
-
-export const getAllDetailsByOrderCode = async (code) => {
-    let res = await fetch("http://172.16.101.146:5537/request_details?code_request=${code}").then(response => response.json());
-    return res
-}
-
-export const getProductByCode = async (code = '') => {
-    let res = await fetch("http://172.16.101.146:5536/products?code_product=${code}")
-    let data = await res.json()
-    return data
-}

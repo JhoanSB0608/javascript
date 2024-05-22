@@ -1,4 +1,4 @@
-import { getAllClientsByCode } from "./client.js"
+import { getAllClientsByCode, getAllClients } from "./client.js"
 //7. Devuelve un listado con los distintos estados por los que puede pasar un pedido.
 export const getAllRequestStatus = async () => {
     let res = await fetch("http://172.16.101.146:5538/requests")
@@ -97,7 +97,7 @@ export const getAllClientsWhoRecievedLateAProduct = async () => {
     let dataClients = [];
 
     // Obtener todos los clientes
-    let clientsRes = await fetch("http://172.16.101.146:5531/clients");
+    let clientsRes = await fetch(getAllClients);
     let clientsData = await clientsRes.json();
     let clientsMap = new Map(clientsData.map(client => [client.client_code, client.client_name]));
 
