@@ -89,7 +89,6 @@ export const getAllRequestsDeliveredJanuary = async () => {
     return dataUpdate;
 }
 
-//10. Devuelve el nombre de los clientes a los que no se les ha entregado a tiempo un pedido.
 // 10. Devuelve el nombre de los clientes a los que no se les ha entregado a tiempo un pedido.
 export const getAllClientsWhoRecievedLateAProduct = async () => {
     let res = await fetch("http://172.16.101.146:5538/requests?status=Entregado");
@@ -97,9 +96,8 @@ export const getAllClientsWhoRecievedLateAProduct = async () => {
     let dataClients = [];
 
     // Obtener todos los clientes
-    let clientsRes = await fetch(getAllClients);
-    let clientsData = await clientsRes.json();
-    let clientsMap = new Map(clientsData.map(client => [client.client_code, client.client_name]));
+    let clients = await getAllClients();
+    let clientsMap = new Map(clients.map(client => [client.client_code, client.client_name])); // Corregido clientsData a clients
 
     for (let i = 0; i < dataRequest.length; i++) {
         let fecha1 = new Date(dataRequest[i].date_wait);

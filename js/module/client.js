@@ -1,6 +1,6 @@
 import { getAllEmployeeNames } from "./employees.js";
 import { getAllClientsWhoPaid } from "./payments.js";
-import { getAllOffices } from "./offices.js";
+import { getAllOffices,getAllOfficesByCity } from "./offices.js";
 import { getAllClientsWhoRequest } from "./requests.js";
 import { getAllRequestDetailsByRequestCode } from "./request_details.js";
 import { getAllProductsByCode } from "./product.js"
@@ -116,7 +116,7 @@ export const getAllClientsAndSalesManagersNameAndIfThereIsPaymentsAndOfficeCity 
             client[i] = clientUpdate;
             let [employee] = await getAllEmployeeNames(clientUpdate.code_employee_sales_manager);
             let { ...employeeUpdate } = employee;
-            let [office] = await getAllOffices(employeeUpdate.code_office);
+            let [office] = await getAllOfficesByCity(employeeUpdate.code_office);
             let { ...officeUpdate } = office;
             let data = { ...clientUpdate, ...employeeUpdate, ...paymentsUpdate, ...officeUpdate };
             dataUpdated.push({
@@ -142,7 +142,7 @@ export const getAllClientsAndSalesManagersNameAndIfThereIsntPaymentsAndOfficeCit
             client[i] = clientUpdate;
             let [employee] = await getAllEmployeeNames(clientUpdate.code_employee_sales_manager);
             let { ...employeeUpdate } = employee;
-            let [office] = await getAllOffices(employeeUpdate.code_office);
+            let [office] = await getAllOfficesByCity(employeeUpdate.code_office);
             let { ...officeUpdate } = office;
             let data = { ...clientUpdate, ...employeeUpdate, ...officeUpdate };
             dataUpdated.push({
@@ -195,7 +195,7 @@ export const getAllClientsAndSalesManagersNameWithTheCItyOfTheOffice = async () 
             position,
             ...employeeUpdate
         } = employee
-        let [office] = await getAllOffices(employeeUpdate.code_office)
+        let [office] = await getAllOfficesByCity(employeeUpdate.code_office)
         let {
             id: id_office,
             country,
@@ -220,7 +220,7 @@ export const getAllClientsAndSalesManagersNameWithTheCItyOfTheOffice = async () 
 
 //obtener el cliente por el codigo
 export const getAllClientsByCode = async (code) => {
-    let res = await fetch("http://172.16.101.146:5531/clients?client_code=${code}")
+    let res = await fetch(`http://172.16.101.146:5531/clients?client_code=${code}`)
     let data = await res.json();
     return data;
 }

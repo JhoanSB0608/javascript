@@ -564,16 +564,18 @@ export class Mycard extends HTMLElement {
             this.shadowRoot.innerHTML += /*HTML*/`
             <div class="report__card">
                 <div class="card__title">
-                    <div>Ciudad y el teléfono de las oficinas de España<div>
+                    <div>Ciudad y el teléfono de las oficinas de España</div>
                 </div>
                 <div class="card__body">
                     <div class="body__marck">
-                        <p><b>Movil: </b> ${val.movil}</p>
+                        <p><b>Ciudad: </b> ${val.code_office}</p>
+                        <p><b>Móvil: </b> ${val.movil}</p>
+                    </div>
                 </div>
             </div>
             `;
         })
-    }
+    }    
 
     async getAllOfficesAddressWithClientsInFuenlabradaDesign() {
         let data = await getAllOfficesAddressWithClientsInFuenlabrada();
@@ -667,15 +669,12 @@ export class Mycard extends HTMLElement {
             this.shadowRoot.innerHTML += /*HTML*/`
             <div class="report__card">
                 <div class="card__title">
-                    <div>Productos que nunca han aparecido en un pedido/div>
+                    <div>Productos que nunca han aparecido en un pedido</div>
                 </div>
                 <div class="card__body">
                     <div class="body__marck">
-                        <p><b>Dimension: </b> ${val.dimension}</p>
-                        <p><b>Proveedor: </b> ${val.provider}</p>
-                        <p><b>Stock: </b> ${val.stock}</p>
-                        <p><b>Precio de venta: </b> ${val.price_sale}</p>
-                        <p><b>Precio de proveedor: </b> ${val.price_provider}</p>
+                        <p><b>Codigo del producto: </b> ${val.code_product}</p>
+                        <p><b>Nombre del producto: </b> ${val.name}</p>
                         <p><b>Id: </b> ${val.id}</p>
                     </div>
                 </div>
@@ -785,7 +784,7 @@ export class Mycard extends HTMLElement {
             this.shadowRoot.innerHTML += /*HTML*/`
             <div class="report__card">
                 <div class="card__title">
-                    <div>Pedidos que han sido entregados en el mes de enero de cualquier año/div>
+                    <div>Pedidos que han sido entregados en el mes de enero de cualquier año</div>
                 </div>
                 <div class="card__body">
                     <div class="body__marck">

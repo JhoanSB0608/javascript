@@ -28,11 +28,18 @@ export const getAllOficceCityAndMovil = async () => {
 }
 
 //obtener el nombre de la ciudad de la oficina
-export const getAllOffices = async (codeOffice) => {
+export const getAllOfficesByCity = async (codeOffice) => {
     let res = await fetch(`http://172.16.101.146:5534/offices?code_office=${codeOffice}`)
     let data = await res.json();
     return data;
 }
+
+
+// Obtener datos de todos los clientes
+export const getAllOffices = async () => {
+    let resOffices = await fetch("http://172.16.101.146:5534/offices");
+    return await resOffices.json();
+};
 
 
 //6. Lista la dirección de las oficinas que tengan clientes en Fuenlabrada.
