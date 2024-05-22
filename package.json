@@ -6,7 +6,7 @@
   "type": "module",
   "scripts": {
     "dev": "node --watch js/main.js",
-    "star all": "",
+    "star-all": "npm run clients & npm run employees & npm run gama & npm run offices & npm run payments & npm run product & npm run request_details & npm run requests",
     "clients": "json-server -h 172.16.101.146 js/db/clients.json -p 5531",
     "employees": "json-server -h 172.16.101.146 js/db/employees.json -p 5532",
     "gama": "json-server -h 172.16.101.146 js/db/gama.json -p 5533",
